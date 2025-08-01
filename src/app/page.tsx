@@ -2,13 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Play, ChevronLeft, ChevronRight, X, Mail } from "lucide-react";
+import { Play, ChevronLeft, ChevronRight, X, Mail, ShoppingCart } from "lucide-react";
 import { motion } from 'framer-motion';
 import { Button } from "@/components/ui/Button";
 import { Release } from "@/types";
 import { useState } from "react";
 import CloudinaryVideo from "@/components/CloudinaryVideo";
 import InstantVideo from "@/components/InstantVideo";
+import StreamingModal from "@/components/StreamingModal";
 
 // Releases data - Actualizado con los últimos lanzamientos
 const releases: Release[] = [
@@ -18,7 +19,7 @@ const releases: Release[] = [
     title: "ENERGY EP",
     artist: "SPCMSK",
     coverImage: "/images/ENERGY EP.png",
-    catalogNumber: "IMP003",
+    catalogNumber: "IMP002",
     releaseDate: "2024-12-15",
     description: "Un explosivo EP que canaliza la energía pura del underground techno.",
     tracklist: [
@@ -30,7 +31,10 @@ const releases: Release[] = [
       { platform: "Beatport", url: "https://www.beatport.com/es/release/energy-ep/5120099", label: "Buy on Beatport" },
     ],
     streamingLinks: [
-      { platform: "Spotify", url: "https://open.spotify.com/album/xyz", label: "Listen on Spotify" },
+      { platform: "Spotify", url: "https://open.spotify.com/intl-es/album/0QYQlMH471cTSHzGavPNAR?si=k1ZmVbixSOuTqPYkJtU5gg", label: "Listen on Spotify" },
+      { platform: "Apple Music", url: "https://music.apple.com/cl/album/energy-ep-ep/1818890589", label: "Listen on Apple Music" },
+      { platform: "SoundCloud", url: "https://soundcloud.com/imp-records-820395379/sets/imp-premiere-spcmsk-energy-ep-imp002?si=76e8e955de4b4bdcb55d7fe2208bc793&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing", label: "Listen on SoundCloud" },
+      { platform: "YouTube", url: "https://www.youtube.com/watch?v=2NFYEc9Yzis&list=OLAK5uy_kUxgrQALAUFobIrhgQmwoJjPrmoqcFp98", label: "Listen on YouTube" },
     ],
   },
   {
@@ -39,7 +43,7 @@ const releases: Release[] = [
     title: "TAKE ONE EP",
     artist: "CX",
     coverImage: "/images/TAKE ONE EP.png",
-    catalogNumber: "IMP004",
+    catalogNumber: "IMP003",
     releaseDate: "2025-01-10",
     description: "La primera toma perfecta de CX en IMPCORE Records.",
     tracklist: [
@@ -51,7 +55,10 @@ const releases: Release[] = [
       { platform: "Beatport", url: "https://www.beatport.com/es/release/take-one-ep/5153717", label: "Buy on Beatport" },
     ],
     streamingLinks: [
-      { platform: "Spotify", url: "https://open.spotify.com/album/xyz", label: "Listen on Spotify" },
+      { platform: "Spotify", url: "https://open.spotify.com/intl-es/album/0cRquvjzzVTTEK1PvZLUAe?si=feaJtdncTm-wUa0AH6h1NQ", label: "Listen on Spotify" },
+      { platform: "Apple Music", url: "https://music.apple.com/cl/album/take-one-ep-single/1823431827", label: "Listen on Apple Music" },
+      { platform: "SoundCloud", url: "https://soundcloud.com/imp-records-820395379/sets/imp-premiere-spcmsk-take-one-ep-imp003?si=087b9503427d40f39914026e3651c5ef&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing", label: "Listen on SoundCloud" },
+      { platform: "YouTube", url: "https://www.youtube.com/watch?v=8K8bRZeOT1s", label: "Listen on YouTube" },
     ],
   },
   {
@@ -72,7 +79,11 @@ const releases: Release[] = [
       { platform: "Bandcamp", url: "https://impcore.bandcamp.com/album/sumergidos-va", label: "Buy on Bandcamp" },
     ],
     streamingLinks: [
-      { platform: "Spotify", url: "https://open.spotify.com/album/xyz", label: "Listen on Spotify" },
+      { platform: "Spotify", url: "https://open.spotify.com/intl-es/album/3AX3t9n4XOx9XjkQJuhhhf?si=oWdWoVZUThaxC-WFWPiSDQ", label: "Listen on Spotify" },
+      { platform: "Apple Music", url: "https://music.apple.com/cl/album/sumergidos-va/1805165753", label: "Listen on Apple Music" },
+      { platform: "SoundCloud", url: "https://soundcloud.com/imp-records-820395379/sets/imp-va0001?si=3efdf0c8fa6b4010a10cbd29c198617a&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing", label: "Listen on SoundCloud" },
+      { platform: "YouTube", url: "https://youtube.com/playlist?list=OLAK5uy_lKZvn8Uvsi8R_Xy7xHkl_eaIvR6offWZg&si=mKTDiFoAZu4bK_aT", label: "Listen on YouTube" },
+      { platform: "Bandcamp", url: "https://impcore.bandcamp.com/album/sumergidos-v-a", label: "Listen on Bandcamp" },
     ],
   },
 ];
@@ -117,6 +128,7 @@ const residents = [
 export default function Home() {
   const [currentReleaseIndex, setCurrentReleaseIndex] = useState(0);
   const [selectedResident, setSelectedResident] = useState<string | null>(null);
+  const [selectedReleaseForStreaming, setSelectedReleaseForStreaming] = useState<Release | null>(null);
 
   const nextRelease = () => {
     setCurrentReleaseIndex((prev) => (prev + 1) % releases.length);
@@ -124,6 +136,16 @@ export default function Home() {
 
   const prevRelease = () => {
     setCurrentReleaseIndex((prev) => (prev - 1 + releases.length) % releases.length);
+  };
+
+  const handleListenClick = (release: Release) => {
+    setSelectedReleaseForStreaming(release);
+  };
+
+  const handleBuyClick = (release: Release) => {
+    if (release.purchaseLinks && release.purchaseLinks.length > 0) {
+      window.open(release.purchaseLinks[0].url, '_blank', 'noopener,noreferrer');
+    }
   };
 
   return (
@@ -224,11 +246,21 @@ export default function Home() {
                       <h3 className="text-white font-bold text-lg mb-2">{release.title}</h3>
                       <p className="text-white/60 mb-4">{release.artist}</p>
                       <div className="flex gap-2">
-                        <Button size="sm" className="bg-white text-black hover:bg-white/90">
+                        <Button 
+                          size="sm" 
+                          className="bg-white text-black hover:bg-white/90"
+                          onClick={() => handleListenClick(release)}
+                        >
                           <Play className="h-4 w-4 mr-2" />
                           Listen
                         </Button>
-                        <Button variant="secondary" size="sm" className="border-white/20 text-white hover:bg-white/10">
+                        <Button 
+                          variant="secondary" 
+                          size="sm" 
+                          className="border-white/20 text-white hover:bg-white/10"
+                          onClick={() => handleBuyClick(release)}
+                        >
+                          <ShoppingCart className="h-4 w-4 mr-2" />
                           Buy
                         </Button>
                       </div>
@@ -631,6 +663,15 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Streaming Modal */}
+      {selectedReleaseForStreaming && (
+        <StreamingModal
+          release={selectedReleaseForStreaming}
+          isOpen={!!selectedReleaseForStreaming}
+          onClose={() => setSelectedReleaseForStreaming(null)}
+        />
+      )}
     </div>
   );
 }
