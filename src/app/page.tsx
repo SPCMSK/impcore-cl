@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { Release } from "@/types";
 import { useState } from "react";
 import CloudinaryVideo from "@/components/CloudinaryVideo";
+import InstantVideo from "@/components/InstantVideo";
 
 // Releases data - Actualizado con los últimos lanzamientos
 const releases: Release[] = [
@@ -140,10 +141,9 @@ export default function Home() {
     <div className="min-h-screen bg-black">
       {/* HOME SECTION - Mutual Rytm Style */}
       <section className="h-screen flex items-center justify-center relative overflow-hidden">
-        {/* Background Video - Cloudinary */}
-        <CloudinaryVideo 
-          cloudinaryUrl="https://res.cloudinary.com/dxysvykkk/video/upload/q_auto:low,f_auto,w_1920,h_1080,c_fill/v1754019807/impcore/background-video-raw.mp4"
-          fallbackImage="/images/background.jpg"
+        {/* Background Video - Instant Load */}
+        <InstantVideo 
+          src="https://res.cloudinary.com/dxysvykkk/video/upload/q_auto:low,f_auto,w_1920,h_1080,c_fill/v1754019807/impcore/background-video-raw.mp4"
         />
         
         {/* Content */}

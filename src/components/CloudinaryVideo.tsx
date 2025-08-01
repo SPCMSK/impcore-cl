@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 interface CloudinaryVideoProps {
   cloudinaryUrl: string;
@@ -15,6 +15,40 @@ export default function CloudinaryVideo({
 }: CloudinaryVideoProps) {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [videoError, setVideoError] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Preload the video immediately
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Set video to load immediately
+    video.load();
+    
+    const handleLoadStart = () => {
+      console.log('Video loading started');
+    };
+
+    const handleCanPlay = () => {
+      console.log('✅ Video can play');
+      setVideoLoaded(true);
+    };
+
+    const handleLoadedData = () => {
+      console.log('✅ Video data loaded');
+      setVideoLoaded(true);
+    };
+
+    video.addEventListener('loadstart', handleLoadStart);
+    video.addEventListener('canplay', handleCanPlay);
+    video.addEventListener('loadeddata', handleLoadedData);
+
+    return () => {
+      video.removeEventListener('loadstart', handleLoadStart);
+      video.removeEventListener('canplay', handleCanPlay);
+      video.removeEventListener('loadeddata', handleLoadedData);
+    };
+  }, []);
 
   // URL optimizada para Cloudinary
   const optimizedVideoUrl = cloudinaryUrl.includes('cloudinary.com') 
@@ -37,23 +71,15 @@ export default function CloudinaryVideo({
 
   return (
     <div className={`absolute inset-0 z-0 ${className}`}>
-      {/* Loading state */}
-      {!videoLoaded && (
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-black to-blue-900 opacity-40 flex items-center justify-center">
-          <div className="text-white/70 text-sm">Loading video...</div>
-        </div>
-      )}
-
-      {/* Video */}
+      {/* Video - Start visible immediately */}
       <video
+        ref={videoRef}
         autoPlay
         muted
         loop
         playsInline
-        preload="metadata"
-        className={`w-full h-full object-cover transition-opacity duration-1000 ${
-          videoLoaded ? 'opacity-40' : 'opacity-0'
-        }`}
+        preload="auto"
+        className="w-full h-full object-cover opacity-40"
         onLoadedData={() => {
           console.log('✅ Cloudinary video loaded');
           setVideoLoaded(true);
