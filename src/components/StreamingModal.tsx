@@ -18,7 +18,7 @@ export const StreamingModal: React.FC<StreamingModalProps> = ({
   if (!isOpen) return null;
 
   const handlePlatformClick = (url: string) => {
-    console.log('Clicking platform:', url); // Debug log
+    console.log('Opening platform:', url); // Debug log
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
