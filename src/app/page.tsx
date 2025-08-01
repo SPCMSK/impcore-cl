@@ -85,43 +85,32 @@ const residents = [
     image: "/images/spcmsk.jpg",
     role: "Underground Sessions",
     bio: "Especialista en sesiones subterráneas y frecuencias enmascaradas.",
-    fullBio: "SPCMSK es un pionero en las sesiones subterráneas de techno, conocido por su enfoque experimental y su habilidad para crear atmósferas inmersivas. Con más de 5 años en la escena, ha desarrollado un sonido único que combina elementos industriales con texturas ambientales profundas.",
+    fullBio: "SPCMSK, DJ y productor chileno de 23 años nacido en Viña del Mar, comenzó su pasión por la música influenciado por EDM y artistas como Skrillex y Zomboy. A los 16 años descubrió el techno, desarrollando un estilo versátil que combina hardgroove percusivo con techno rápido y groovero. A los 21 años incursionó en la producción musical y ha tocado en clubes como Woo Club, The House y Espacio 93, compartiendo escenario con artistas reconocidos. Actualmente, cuenta con lanzamientos en sellos como Inherente Project y DKN Selections y es fundador de IMP CORE, su sello y productora de eventos, consolidándose como una promesa del techno chileno.",
     email: "spcmsk@impcore.com",
     videos: [],
     releases: ["ENERGY EP", "Sumergidos V.A."]
   },
   {
     id: "2", 
-    name: "Cinder",
+    name: "CINDER",
     image: "/images/CINDER1.jpg",
     role: "Ember Tracks",
     bio: "Creador de texturas ardientes y paisajes sonoros experimentales.",
-    fullBio: "Cinder emerge desde las cenizas del techno tradicional para crear paisajes sonoros que arden con intensidad emocional. Su enfoque experimental combina elementos orgánicos con síntesis modular, creando texturas que evocan tanto destrucción como renacimiento.",
+    fullBio: "Cinder artista de la quinta región reconocido por sus mezclas entre raw techno y hardgroove. Se caracteriza por sets bastante hypnóticos y sonidos grooveros. A través del tiempo ha logrado tocar en importantes clubes de su región y en la capital de nuestro país",
     email: "cinder@impcore.com",
     videos: ["https://www.youtube.com/embed/jRD4jQRYOSE?si=Z7-vhYZukf7BahHg"],
     releases: ["Sumergidos V.A.", "Ember Sessions EP"]
   },
   {
     id: "3",
-    name: "Residente Nasac",
+    name: "NASAC",
     image: "/images/NASAC.jpg", 
     role: "Midnight Frequencies",
     bio: "Residente principal especializado en frecuencias nocturnas.",
-    fullBio: "Nasac es el alma nocturna de IMPCORE Records. Especializado en frecuencias que emergen en las horas más profundas de la noche, su música transporta a los oyentes a dimensiones donde el tiempo se desvanece y solo existe el pulso primordial del techno.",
+    fullBio: "Nicolás Sanhueza, conocido como Nasac, es un DJ emergente apasionado por el techno. Su viaje comenzó en 2019 como parte del público, y en 2022 decidió dedicarse profesionalmente. En 2023 adquirió su primera controladora y estudió en DJ School, presentando sus primeros sets en The House. Actualmente, es residente en BigBang Label, IMPCORE y Deforastó Club, explorando géneros como peak time, rawstyle/hardgroove y hard techno. También se dedica a la producción musical, enfocándose en raw techno y hardgroove. Su estilo busca generar una conexión profunda con el público, creando una atmósfera inmersiva a través de sonidos estimulantes. Su objetivo es mantener a la audiencia en sintonía con la música, estableciendo una experiencia de baile única y envolvente.",
     email: "nasac@impcore.com",
     videos: ["https://www.youtube.com/embed/GiyaS1mkF74?si=qwbv9b4zKOZ-MZb-"],
     releases: ["Sumergidos V.A.", "Midnight Chronicles", "Deep Frequencies Vol.1"]
-  },
-  {
-    id: "4",
-    name: "CX",
-    image: "/images/spcmsk.jpg",
-    role: "Experimental Producer",
-    bio: "Productor emergente especializado en texturas experimentales.",
-    fullBio: "CX emerge en la escena con un enfoque fresco y experimental al techno. Su debut 'TAKE ONE EP' demuestra una comprensión profunda de las texturas sonoras modernas, combinando elementos clásicos del underground con innovaciones contemporáneas.",
-    email: "cx@impcore.com",
-    videos: [],
-    releases: ["TAKE ONE EP"]
   }
 ];
 
@@ -414,7 +403,7 @@ export default function Home() {
             <p className="text-white/60 text-lg">The core of our sound</p>
           </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {residents.map((resident, index) => (
               <motion.div
                 key={resident.id}
@@ -426,7 +415,7 @@ export default function Home() {
                 onClick={() => setSelectedResident(resident.id)}
               >
                 <div className="relative mb-6">
-                  <div className="w-64 h-64 mx-auto rounded-full overflow-hidden">
+                  <div className="w-64 h-64 mx-auto rounded-lg overflow-hidden">
                     <Image
                       src={resident.image}
                       alt={resident.name}
@@ -468,7 +457,7 @@ export default function Home() {
                       {/* Header */}
                       <div className="flex justify-between items-start mb-6">
                         <div className="flex items-center gap-6">
-                          <div className="w-24 h-24 rounded-full overflow-hidden">
+                          <div className="w-24 h-24 rounded-lg overflow-hidden">
                             <Image
                               src={resident.image}
                               alt={resident.name}
