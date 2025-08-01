@@ -139,10 +139,12 @@ export default function Home() {
   };
 
   const handleListenClick = (release: Release) => {
+    console.log('Listen clicked for:', release.title); // Debug log
     setSelectedReleaseForStreaming(release);
   };
 
   const handleBuyClick = (release: Release) => {
+    console.log('Buy clicked for:', release.title); // Debug log
     if (release.purchaseLinks && release.purchaseLinks.length > 0) {
       window.open(release.purchaseLinks[0].url, '_blank', 'noopener,noreferrer');
     }

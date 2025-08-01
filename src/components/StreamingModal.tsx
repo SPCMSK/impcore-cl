@@ -18,7 +18,13 @@ export const StreamingModal: React.FC<StreamingModalProps> = ({
   if (!isOpen) return null;
 
   const handlePlatformClick = (url: string) => {
+    console.log('Clicking platform:', url); // Debug log
     window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleClose = () => {
+    console.log('Closing modal'); // Debug log
+    onClose();
   };
 
   const getPlatformColor = (platform: string) => {
@@ -39,12 +45,20 @@ export const StreamingModal: React.FC<StreamingModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div 
+      className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          onClose();
+        }
+      }}
+    >
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.9 }}
-        className="bg-zinc-900 rounded-lg max-w-md w-full p-6 border border-white/10"
+        className="bg-zinc-900 rounded-lg max-w-md w-full p-6 border border-white/10 relative z-50"
+        onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
         <div className="flex justify-between items-start mb-6">
@@ -53,8 +67,13 @@ export const StreamingModal: React.FC<StreamingModalProps> = ({
             <p className="text-white/60 text-sm">{release.title} - {release.artist}</p>
           </div>
           <button
-            onClick={onClose}
-            className="text-white/60 hover:text-white transition-colors p-1"
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              handleClose();
+            }}
+            className="text-white/60 hover:text-white transition-colors p-1 cursor-pointer z-10"
           >
             <X size={20} />
           </button>
@@ -67,13 +86,17 @@ export const StreamingModal: React.FC<StreamingModalProps> = ({
           </h4>
           
           {release.streamingLinks.map((link, index) => (
-            <motion.button
+            <button
               key={index}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.1 }}
-              onClick={() => handlePlatformClick(link.url)}
-              className={`w-full flex items-center gap-4 p-4 rounded-lg border bg-transparent transition-all duration-200 ${getPlatformColor(link.platform)}`}
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Button clicked:', link.platform, link.url);
+                handlePlatformClick(link.url);
+              }}
+              className={`w-full flex items-center gap-4 p-4 rounded-lg border transition-all duration-200 cursor-pointer ${getPlatformColor(link.platform)}`}
+              style={{ pointerEvents: 'auto' }}
             >
               <PlatformIcon 
                 platform={link.platform} 
@@ -85,7 +108,7 @@ export const StreamingModal: React.FC<StreamingModalProps> = ({
                 <p className="text-xs text-white/60">Stream now</p>
               </div>
               <ExternalLink size={16} className="text-white/40" />
-            </motion.button>
+            </button>
           ))}
         </div>
 
@@ -97,13 +120,17 @@ export const StreamingModal: React.FC<StreamingModalProps> = ({
             </h4>
             
             {release.purchaseLinks.map((link, index) => (
-              <motion.button
+              <button
                 key={index}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: (release.streamingLinks.length + index) * 0.1 }}
-                onClick={() => handlePlatformClick(link.url)}
-                className="w-full flex items-center gap-4 p-4 rounded-lg border border-white/30 bg-white/5 hover:bg-white/10 transition-all duration-200"
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  console.log('Purchase button clicked:', link.platform, link.url);
+                  handlePlatformClick(link.url);
+                }}
+                className="w-full flex items-center gap-4 p-4 rounded-lg border border-white/30 bg-white/5 hover:bg-white/10 transition-all duration-200 cursor-pointer"
+                style={{ pointerEvents: 'auto' }}
               >
                 <PlatformIcon 
                   platform={link.platform} 
@@ -115,7 +142,7 @@ export const StreamingModal: React.FC<StreamingModalProps> = ({
                   <p className="text-xs text-white/60">Buy now</p>
                 </div>
                 <ExternalLink size={16} className="text-white/40" />
-              </motion.button>
+              </button>
             ))}
           </div>
         )}
