@@ -32,8 +32,6 @@ export const useMusicPlayer = create<MusicPlayerStore>((set, get) => ({
   duration: 0,
 
   playTrack: (track: Track, playlist?: Track[]) => {
-    const state = get();
-    
     if (playlist) {
       const trackIndex = playlist.findIndex(t => t.id === track.id);
       set({

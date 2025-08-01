@@ -16,7 +16,6 @@ export function MusicPlayer() {
     volume,
     currentTime,
     duration,
-    playTrack,
     pauseTrack,
     resumeTrack,
     nextTrack,
@@ -52,7 +51,7 @@ export function MusicPlayer() {
       audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
       audio.removeEventListener('ended', handleEnded);
     };
-  }, [nextTrack, setCurrentTime, setDuration]);
+  }, [setCurrentTime, setDuration, nextTrack]);
 
   // Sync audio playback with store state
   useEffect(() => {

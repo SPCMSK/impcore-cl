@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 
 interface VideoIntroProps {
   onComplete: () => void;
@@ -113,9 +114,11 @@ export default function VideoIntro({ onComplete }: VideoIntroProps) {
               transition={{ delay: 1.5, duration: 0.8 }}
               className="absolute top-8 left-8"
             >
-              <img
+              <Image
                 src="/images/LOGOIMP.png"
                 alt="IMPCORE"
+                width={96}
+                height={48}
                 className="h-12 w-auto opacity-80"
               />
             </motion.div>

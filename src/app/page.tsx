@@ -1,13 +1,11 @@
 'use client';
 
 import Image from "next/image";
-import Link from "next/link";
 import { Play, ChevronLeft, ChevronRight, X, Mail, ShoppingCart } from "lucide-react";
 import { motion } from 'framer-motion';
 import { Button } from "@/components/ui/Button";
 import { Release } from "@/types";
 import { useState } from "react";
-import CloudinaryVideo from "@/components/CloudinaryVideo";
 import InstantVideo from "@/components/InstantVideo";
 import StreamingModal from "@/components/StreamingModal";
 

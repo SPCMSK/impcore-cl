@@ -11,7 +11,11 @@ export default function OptimizedVideoBackground() {
     const video = videoRef.current;
     if (!video) return;
 
-    let timeoutId: NodeJS.Timeout;
+    let timeoutId: NodeJS.Timeout = setTimeout(() => {
+      console.log('⏰ Timeout reached, showing YouTube');
+      setVideoState('failed');
+      setShowYoutube(true);
+    }, 3000);
     
     const handleCanPlay = () => {
       console.log('✅ Video can play');
@@ -19,12 +23,15 @@ export default function OptimizedVideoBackground() {
       clearTimeout(timeoutId);
     };
 
-    const handleError = (e: any) => {
+    const handleError = (e: Event) => {
       console.error('❌ Video error:', e);
       setVideoState('failed');
       setShowYoutube(true);
       clearTimeout(timeoutId);
     };
+
+    video.addEventListener('canplay', handleCanPlay);
+    video.addEventListener('error', handleError);
 
     // Timeout después de 3 segundos
     timeoutId = setTimeout(() => {

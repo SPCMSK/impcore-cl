@@ -14,7 +14,7 @@ export const useVideoDebug = (src: string) => {
     };
     
     video.onerror = (e) => {
-      setStatus(`❌ Video failed to load: ${e.type}`);
+      setStatus(`❌ Video failed to load: ${e instanceof Event ? e.type || 'Unknown error' : e}`);
     };
     
     video.src = src;
