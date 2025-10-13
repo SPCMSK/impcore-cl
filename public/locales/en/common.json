@@ -1,0 +1,96 @@
+{
+  "nav": {
+    "releases": "Releases",
+    "artists": "Artists",
+    "events": "Events", 
+    "demos": "Demos"
+  },
+  "home": {
+    "hero": {
+      "title": "IMPCORE",
+      "subtitle": "Independent record label dedicated to underground electronic music"
+    },
+    "navigation": {
+      "inicio": "HOME",
+      "lanzamientos": "RELEASES",
+      "sesiones": "SESSIONS", 
+      "residentes": "RESIDENTS",
+      "eventos": "EVENTS",
+      "demos": "DEMOS"
+    },
+    "buttons": {
+      "send_demo": "Send Demo",
+      "explore_music": "Explore Music", 
+      "listen": "Listen",
+      "buy": "Buy",
+      "view_profile": "View Profile",
+      "get_tickets": "Get Tickets",
+      "submit_demo": "Submit Demo",
+      "apply_now": "Apply Now",
+      "contact": "Contact"
+    },
+    "sections": {
+      "releases": {
+        "title": "RELEASES",
+        "subtitle": "Latest Releases"
+      },
+      "sessions": {
+        "title": "SESSIONS",
+        "subtitle": "Relive the best moments from our gatherings"
+      },
+      "residents": {
+        "title": "RESIDENTS", 
+        "subtitle": "The core of our sound"
+      },
+      "events": {
+        "title": "EVENTS",
+        "subtitle": "Upcoming shows and tickets"
+      },
+      "demos": {
+        "title": "DEMOS",
+        "subtitle": "Demo submissions, radio & bookings"
+      }
+    },
+    "demo_section": {
+      "submission": {
+        "title": "Demo Submissions",
+        "description": "Send us your tracks for label consideration"
+      },
+      "radio": {
+        "title": "Radio Shows",
+        "description": "Apply for radio slots and podcasts"
+      },
+      "booking": {
+        "title": "Booking",
+        "description": "Book our artists for your events"
+      }
+    },
+    "resident_modal": {
+      "biography": "Biography",
+      "featured_videos": "Featured Videos",
+      "releases": "Releases", 
+      "booking": "Booking",
+      "contact_booking": "Contact for Booking",
+      "download_press_kit": "Download Press Kit"
+    }
+  },
+  "footer": {
+    "brand_description": "An independent record label focused on breaking boundaries and discovering new sounds in the underground scene.",
+    "newsletter": {
+      "title": "Newsletter",
+      "description": "Stay up to date with our latest releases and events.",
+      "placeholder": "Your email",
+      "subscribe": "Subscribe"
+    },
+    "quick_links": {
+      "title": "Quick Links",
+      "releases": "Releases",
+      "artists": "Artists",
+      "events": "Events", 
+      "demos": "Demos",
+      "contact": "Contact",
+      "press": "Press"
+    },
+    "copyright": "All rights reserved."
+  }
+}

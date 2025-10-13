@@ -1,5 +1,47 @@
 import { ArtistAvatar } from "@/components/ArtistAvatar";
 import { Artist } from "@/types";
+import type { Metadata } from "next";
+import { BackgroundGridPattern } from "@/components/ui/aceternity/background-grid";
+import { TextReveal } from "@/components/ui/aceternity/text-reveal";
+import { MovingBorderButton } from "@/components/ui/aceternity/moving-border";
+
+export const metadata: Metadata = {
+  title: "Artistas",
+  description: "Conoce a los talentosos artistas y DJs residentes de IMPCORE Records. Con SPCMSK, CINDER, NASAC y otros productores e intérpretes de música electrónica underground.",
+  keywords: [
+    "artistas música electrónica",
+    "artistas techno",
+    "artistas IMPCORE Records",
+    "SPCMSK",
+    "CINDER",
+    "NASAC",
+    "DJs underground",
+    "productores techno",
+    "música electrónica chilena",
+    "artistas residentes"
+  ],
+  openGraph: {
+    title: "Artistas | IMPCORE Records",
+    description: "Conoce a los talentosos artistas y DJs residentes de IMPCORE Records especializados en música electrónica underground.",
+    images: [
+      {
+        url: "/images/LOGOIMP.png",
+        width: 1200,
+        height: 630,
+        alt: "Artistas IMPCORE Records",
+      }
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Artistas | IMPCORE Records",
+    description: "Artistas de música electrónica underground de IMPCORE Records",
+    images: ["/images/LOGOIMP.png"],
+  },
+  alternates: {
+    canonical: "https://impcore-cl.vercel.app/artists",
+  },
+};
 
 // Mock data actualizado con artistas reales de IMPCORE
 const artists: Artist[] = [
@@ -52,16 +94,20 @@ const artists: Artist[] = [
 
 export default function ArtistsPage() {
   return (
-    <div className="min-h-screen py-20">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen py-20 relative overflow-hidden">
+      {/* Background Grid Pattern */}
+      <BackgroundGridPattern className="absolute inset-0 z-0" />
+      
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center space-y-4 mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-wide text-foreground">
-            Artists
-          </h1>
+          <TextReveal 
+            text="Artistas" 
+            className="text-4xl md:text-5xl tracking-wide text-foreground"
+          />
           <p className="text-foreground/60 max-w-2xl mx-auto text-lg">
-            Meet the innovative artists shaping the future of electronic music 
-            through IMPCORE Records.
+            Conoce a los artistas innovadores que dan forma al futuro de la música electrónica 
+            a través de IMPCORE Records.
           </p>
         </div>
 
@@ -73,17 +119,21 @@ export default function ArtistsPage() {
         </div>
 
         {/* Call to Action */}
-        <div className="text-center mt-16 py-12 bg-card/30 rounded-lg">
+        <div className="text-center mt-16 py-12 bg-card/30 rounded-lg border border-accent/10">
           <h2 className="text-2xl font-bold text-foreground mb-4">
-            Interested in joining IMPCORE?
+            ¿Interesado en unirte a IMPCORE?
           </h2>
           <p className="text-foreground/60 mb-6 max-w-lg mx-auto">
-            We&apos;re always looking for talented artists who share our vision 
-            for innovative electronic music.
+            Siempre estamos buscando artistas talentosos que compartan nuestra visión 
+            de la música electrónica innovadora.
           </p>
-          <button className="px-8 py-3 bg-accent hover:bg-accent/90 text-background font-medium rounded-lg transition-colors">
-            Submit Your Demo
-          </button>
+          <MovingBorderButton
+            borderRadius="0.5rem"
+            className="bg-background/80 text-foreground hover:bg-background"
+            duration={3000}
+          >
+            Envía Tu Demo
+          </MovingBorderButton>
         </div>
       </div>
     </div>

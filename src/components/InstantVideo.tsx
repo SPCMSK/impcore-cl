@@ -8,15 +8,16 @@ interface InstantVideoProps {
 
 export default function InstantVideo({ src }: InstantVideoProps) {
   useEffect(() => {
-    // Preload video immediately
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.href = src;
-    link.as = 'video';
-    document.head.appendChild(link);
+    // Preload video using video element instead of link preload
+    const video = document.createElement('video');
+    video.src = src;
+    video.preload = 'metadata';
+    video.muted = true;
+    video.style.display = 'none';
+    document.body.appendChild(video);
 
     return () => {
-      document.head.removeChild(link);
+      document.body.removeChild(video);
     };
   }, [src]);
 

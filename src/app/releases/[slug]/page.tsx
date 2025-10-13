@@ -5,6 +5,7 @@ import { Play, ExternalLink, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Release, Track } from "@/types";
 import { formatDate } from "@/lib/utils";
+import type { Metadata } from "next";
 
 // Mock data - En una aplicación real, esto vendría de un CMS
 const releases: Release[] = [
@@ -42,6 +43,57 @@ async function getRelease(slug: string): Promise<Release | null> {
 
 interface ReleasePageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: ReleasePageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const release = await getRelease(slug);
+
+  if (!release) {
+    return {
+      title: "Release Not Found",
+      description: "The requested release could not be found.",
+    };
+  }
+
+  return {
+    title: `${release.title} - ${release.artist}`,
+    description: release.description || `Listen to ${release.title} by ${release.artist} on IMPCORE Records. Available on Spotify, Beatport, SoundCloud and more streaming platforms.`,
+    keywords: [
+      release.artist,
+      release.title,
+      "techno",
+      "electronic music",
+      "IMPCORE Records",
+      "underground techno",
+      "beatport",
+      "spotify",
+      release.catalogNumber,
+    ],
+    openGraph: {
+      title: `${release.title} - ${release.artist} | IMPCORE Records`,
+      description: release.description || `Listen to ${release.title} by ${release.artist} on IMPCORE Records.`,
+      images: [
+        {
+          url: release.coverImage,
+          width: 800,
+          height: 800,
+          alt: `${release.artist} - ${release.title} Cover Art`,
+        }
+      ],
+      type: "music.album",
+      releaseDate: release.releaseDate,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${release.title} - ${release.artist}`,
+      description: release.description || `New release on IMPCORE Records`,
+      images: [release.coverImage],
+    },
+    alternates: {
+      canonical: `https://impcore-cl.vercel.app/releases/${release.slug}`,
+    },
+  };
 }
 
 export default async function ReleasePage({ params }: ReleasePageProps) {

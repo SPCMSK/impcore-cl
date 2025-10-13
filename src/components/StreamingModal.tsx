@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { X, ExternalLink } from 'lucide-react';
 import { PlatformIcon } from './PlatformIcons';
 import { Release } from '@/types';
+import { musicEvents } from './GoogleAnalytics';
+import { ShimmerButton } from './ui/aceternity/shimmer-button';
 
 interface StreamingModalProps {
   release: Release;
@@ -17,8 +19,9 @@ export const StreamingModal: React.FC<StreamingModalProps> = ({
 }) => {
   if (!isOpen) return null;
 
-  const handlePlatformClick = (url: string) => {
+  const handlePlatformClick = (url: string, platform: string) => {
     console.log('Opening platform:', url); // Debug log
+    musicEvents.clickStreamingLink(platform, release.title);
     window.open(url, '_blank', 'noopener,noreferrer');
   };
 
@@ -39,6 +42,12 @@ export const StreamingModal: React.FC<StreamingModalProps> = ({
         return 'hover:bg-red-600 border-red-500 text-red-400';
       case 'bandcamp':
         return 'hover:bg-blue-600 border-blue-500 text-blue-400';
+      case 'beatport':
+        return 'hover:bg-teal-600 border-teal-500 text-teal-400';
+      case 'itunes':
+        return 'hover:bg-purple-600 border-purple-500 text-purple-400';
+      case 'deezer':
+        return 'hover:bg-pink-600 border-pink-500 text-pink-400';
       default:
         return 'hover:bg-white/20 border-white/30 text-white/70';
     }
@@ -86,17 +95,20 @@ export const StreamingModal: React.FC<StreamingModalProps> = ({
           </h4>
           
           {release.streamingLinks.map((link, index) => (
-            <button
+            <ShimmerButton
               key={index}
               type="button"
               onClick={(e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 console.log('Button clicked:', link.platform, link.url);
-                handlePlatformClick(link.url);
+                handlePlatformClick(link.url, link.platform);
               }}
               className={`w-full flex items-center gap-4 p-4 rounded-lg border transition-all duration-200 cursor-pointer ${getPlatformColor(link.platform)}`}
-              style={{ pointerEvents: 'auto' }}
+              shimmerSize="0.1em"
+              shimmerDuration="2s"
+              borderRadius="0.5rem"
+              background="rgba(24, 24, 27, 0.8)"
             >
               <PlatformIcon 
                 platform={link.platform} 
@@ -108,7 +120,7 @@ export const StreamingModal: React.FC<StreamingModalProps> = ({
                 <p className="text-xs text-white/60">Stream now</p>
               </div>
               <ExternalLink size={16} className="text-white/40" />
-            </button>
+            </ShimmerButton>
           ))}
         </div>
 
@@ -120,17 +132,21 @@ export const StreamingModal: React.FC<StreamingModalProps> = ({
             </h4>
             
             {release.purchaseLinks.map((link, index) => (
-              <button
+              <ShimmerButton
                 key={index}
                 type="button"
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
                   console.log('Purchase button clicked:', link.platform, link.url);
-                  handlePlatformClick(link.url);
+                  handlePlatformClick(link.url, link.platform);
                 }}
                 className="w-full flex items-center gap-4 p-4 rounded-lg border border-white/30 bg-white/5 hover:bg-white/10 transition-all duration-200 cursor-pointer"
-                style={{ pointerEvents: 'auto' }}
+                shimmerSize="0.1em"
+                shimmerDuration="2.5s"
+                borderRadius="0.5rem"
+                background="rgba(255, 255, 255, 0.05)"
+                shimmerColor="rgba(255, 255, 255, 0.5)"
               >
                 <PlatformIcon 
                   platform={link.platform} 
@@ -142,7 +158,7 @@ export const StreamingModal: React.FC<StreamingModalProps> = ({
                   <p className="text-xs text-white/60">Buy now</p>
                 </div>
                 <ExternalLink size={16} className="text-white/40" />
-              </button>
+              </ShimmerButton>
             ))}
           </div>
         )}

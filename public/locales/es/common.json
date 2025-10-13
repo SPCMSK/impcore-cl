@@ -1,0 +1,96 @@
+{
+  "nav": {
+    "releases": "Lanzamientos",
+    "artists": "Artistas", 
+    "events": "Eventos",
+    "demos": "Demos"
+  },
+  "home": {
+    "hero": {
+      "title": "IMPCORE",
+      "subtitle": "Sello discográfico independiente dedicado a la música electrónica underground"
+    },
+    "navigation": {
+      "inicio": "INICIO",
+      "lanzamientos": "LANZAMIENTOS", 
+      "sesiones": "SESIONES",
+      "residentes": "RESIDENTES",
+      "eventos": "EVENTOS",
+      "demos": "DEMOS"
+    },
+    "buttons": {
+      "send_demo": "Enviar Demo",
+      "explore_music": "Explorar Música",
+      "listen": "Escuchar",
+      "buy": "Comprar",
+      "view_profile": "Ver Perfil",
+      "get_tickets": "Obtener Entradas",
+      "submit_demo": "Enviar Demo",
+      "apply_now": "Aplicar Ahora",
+      "contact": "Contactar"
+    },
+    "sections": {
+      "releases": {
+        "title": "LANZAMIENTOS",
+        "subtitle": "Últimos Lanzamientos"
+      },
+      "sessions": {
+        "title": "SESIONES", 
+        "subtitle": "Revive los mejores momentos de nuestros encuentros"
+      },
+      "residents": {
+        "title": "RESIDENTES",
+        "subtitle": "El núcleo de nuestro sonido"
+      },
+      "events": {
+        "title": "EVENTOS",
+        "subtitle": "Próximos shows y entradas"
+      },
+      "demos": {
+        "title": "DEMOS",
+        "subtitle": "Envío de demos, radio y contrataciones"
+      }
+    },
+    "demo_section": {
+      "submission": {
+        "title": "Envío de Demos",
+        "description": "Envíanos tus tracks para consideración del sello"
+      },
+      "radio": {
+        "title": "Shows de Radio", 
+        "description": "Aplica para slots de radio y podcasts"
+      },
+      "booking": {
+        "title": "Contrataciones",
+        "description": "Contrata nuestros artistas para tus eventos"
+      }
+    },
+    "resident_modal": {
+      "biography": "Biografía",
+      "featured_videos": "Videos Destacados",
+      "releases": "Lanzamientos",
+      "booking": "Contrataciones",
+      "contact_booking": "Contactar para Contratación",
+      "download_press_kit": "Descargar Press Kit"
+    }
+  },
+  "footer": {
+    "brand_description": "Un sello discográfico independiente enfocado en romper límites y descubrir nuevos sonidos en la escena underground.",
+    "newsletter": {
+      "title": "Newsletter",
+      "description": "Mantente al día con nuestros últimos lanzamientos y eventos.",
+      "placeholder": "Tu email",
+      "subscribe": "Suscribirse"
+    },
+    "quick_links": {
+      "title": "Enlaces Rápidos",
+      "releases": "Lanzamientos",
+      "artists": "Artistas", 
+      "events": "Eventos",
+      "demos": "Demos",
+      "contact": "Contacto",
+      "press": "Prensa"
+    },
+    "copyright": "Todos los derechos reservados."
+  }
+}

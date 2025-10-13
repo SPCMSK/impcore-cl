@@ -4,7 +4,9 @@ import {
   FaApple, 
   FaSoundcloud, 
   FaYoutube, 
-  FaBandcamp 
+  FaBandcamp,
+  FaItunes,
+  FaMusic
 } from 'react-icons/fa';
 import { SiBeatport } from 'react-icons/si';
 
@@ -42,6 +44,12 @@ export const PlatformIcon: React.FC<PlatformIconProps> = ({
 
     case 'bandcamp':
       return <FaBandcamp {...iconProps} />;
+
+    case 'itunes':
+      return <FaItunes {...iconProps} />;
+
+    case 'deezer':
+      return <FaMusic {...iconProps} />;
 
     default:
       return (
