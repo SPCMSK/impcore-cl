@@ -15,11 +15,27 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "IMPCORE Records - Sello de Música Electrónica Underground",
-    template: "%s | IMPCORE Records"
+    default: "IMPCORE RECORDS",
+    template: "%s | IMPCORE RECORDS"
   },
   description: "IMPCORE Records - Sello discográfico independiente de Chile especializado en techno underground, hardgroove y música electrónica experimental. Con artistas residentes SPCMSK, CINDER y NASAC.",
+  icons: {
+    icon: [
+      { url: '/icon.png', sizes: '32x32', type: 'image/png' },
+      { url: '/icon.png', sizes: '64x64', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
   keywords: [
+    "IMPCORE",
+    "IMPCORE RECORDS",
+    "Labels Chilenos",
+    "musica electronica chilena",
+    "tecno valparaiso",
+    "techno valparaiso",
+    "techno quinta region",
     "música electrónica", 
     "sello discográfico", 
     "techno underground", 
@@ -48,8 +64,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_CL",
     url: "https://impcore-cl.vercel.app",
-    siteName: "IMPCORE Records",
-    title: "IMPCORE Records - Sello de Música Electrónica Underground",
+    siteName: "IMPCORE RECORDS",
+    title: "IMPCORE RECORDS",
     description: "Sello discográfico independiente de Chile especializado en techno underground, hardgroove y música electrónica experimental.",
     images: [
       {
@@ -64,7 +80,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@impcore_records",
     creator: "@impcore_records",
-    title: "IMPCORE Records - Sello de Música Electrónica Underground",
+    title: "IMPCORE RECORDS",
     description: "Sello discográfico independiente de Chile especializado en techno underground, hardgroove y música electrónica experimental.",
     images: ["/images/LOGOIMP.png"],
   },
