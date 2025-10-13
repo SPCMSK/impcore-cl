@@ -6,7 +6,6 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ClientProviders } from "@/components/ClientProviders";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
-import { AuthProvider } from "@/contexts/AuthContext";
 import { Toaster } from 'react-hot-toast';
 
 const inter = Inter({
@@ -101,38 +100,36 @@ export default function RootLayout({
         </Suspense>
       </head>
       <body className="antialiased min-h-screen bg-background text-foreground">
-        <AuthProvider>
-          <ClientProviders>
-            <Header />
-            <main>
-              {children}
-            </main>
-            <Footer />
-          </ClientProviders>
-          <Toaster 
-            position="top-right"
-            toastOptions={{
-              duration: 4000,
-              style: {
-                background: '#1A1A1A',
-                color: '#F5F5F5',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
+        <ClientProviders>
+          <Header />
+          <main>
+            {children}
+          </main>
+          <Footer />
+        </ClientProviders>
+        <Toaster 
+          position="top-right"
+          toastOptions={{
+            duration: 4000,
+            style: {
+              background: '#1A1A1A',
+              color: '#F5F5F5',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+            },
+            success: {
+              iconTheme: {
+                primary: '#0066FF',
+                secondary: '#F5F5F5',
               },
-              success: {
-                iconTheme: {
-                  primary: '#0066FF',
-                  secondary: '#F5F5F5',
-                },
+            },
+            error: {
+              iconTheme: {
+                primary: '#FF3366',
+                secondary: '#F5F5F5',
               },
-              error: {
-                iconTheme: {
-                  primary: '#FF3366',
-                  secondary: '#F5F5F5',
-                },
-              },
-            }}
-          />
-        </AuthProvider>
+            },
+          }}
+        />
       </body>
     </html>
   );
