@@ -1,0 +1,18 @@
+# robots.txt para IMPCORE Records
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Sitemaps
+Sitemap: https://impcore-cl.vercel.app/sitemap.xml
+Sitemap: https://impcore.cl/sitemap.xml
+
+# Rastreadores específicos
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /

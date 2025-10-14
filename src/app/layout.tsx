@@ -6,6 +6,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ClientProviders } from "@/components/ClientProviders";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { StructuredData } from "@/components/StructuredData";
 import { Toaster } from 'react-hot-toast';
 
 const inter = Inter({
@@ -14,11 +15,13 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://impcore-cl.vercel.app'),
   title: {
     default: "IMPCORE RECORDS",
     template: "%s | IMPCORE RECORDS"
   },
   description: "IMPCORE Records - Sello discográfico independiente de Chile especializado en techno underground, hardgroove y música electrónica experimental. Con artistas residentes SPCMSK, CINDER y NASAC.",
+  applicationName: "IMPCORE Records",
   icons: {
     icon: [
       { url: '/icon.png', sizes: '32x32', type: 'image/png' },
@@ -31,11 +34,17 @@ export const metadata: Metadata = {
   keywords: [
     "IMPCORE",
     "IMPCORE RECORDS",
+    "IMPCORE CL",
+    "impcore.cl",
+    "impcore chile",
+    "impcore valparaiso",
     "Labels Chilenos",
+    "sello discografico chile",
     "musica electronica chilena",
     "tecno valparaiso",
     "techno valparaiso",
     "techno quinta region",
+    "techno viña del mar",
     "música electrónica", 
     "sello discográfico", 
     "techno underground", 
@@ -48,13 +57,15 @@ export const metadata: Metadata = {
     "SPCMSK",
     "CINDER", 
     "NASAC",
-    "beatport",
-    "spotify electronic",
-    "soundcloud techno",
+    "beatport chile",
+    "spotify electronic chile",
+    "soundcloud techno chile",
     "raw techno",
     "peak time techno",
     "hard techno",
-    "electrónica experimental"
+    "electrónica experimental",
+    "DJ chile",
+    "productor techno chile"
   ],
   authors: [{ name: "IMPCORE Records" }],
   creator: "IMPCORE Records",
