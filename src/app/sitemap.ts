@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
  
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://impcore-cl.vercel.app'
+  const baseUrl = 'https://www.impcore.cl'
   
   return [
     {

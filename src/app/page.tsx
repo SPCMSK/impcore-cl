@@ -194,7 +194,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
-            className="text-6xl md:text-8xl font-black text-white tracking-wider mb-8"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-white tracking-wider mb-8"
             style={{ fontFamily: 'var(--font-inter)' }}
           >
 IMPCORE
@@ -203,7 +203,7 @@ IMPCORE
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
-            className="text-2xl md:text-3xl font-light text-white/80 tracking-wide"
+            className="text-xl sm:text-2xl md:text-3xl font-light text-white/80 tracking-wide"
             style={{ fontFamily: 'var(--font-inter)' }}
           >
             RECORDS
@@ -212,7 +212,7 @@ IMPCORE
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.6 }}
-            className="text-lg md:text-xl text-white/70 mt-4 max-w-2xl mx-auto"
+            className="text-base sm:text-lg md:text-xl text-white/70 mt-4 max-w-2xl mx-auto px-4"
           >
 Sello discográfico independiente dedicado a la música electrónica underground
           </motion.p>
@@ -283,15 +283,15 @@ Sello discográfico independiente dedicado a la música electrónica underground
           />
         </div>
         
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12 md:mb-16"
           >
-            <h2 className="text-4xl md:text-6xl font-black text-white tracking-wide mb-4">LANZAMIENTOS</h2>
-            <p className="text-white/60 text-lg">Últimos Lanzamientos</p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-wide mb-4">LANZAMIENTOS</h2>
+            <p className="text-white/60 text-base md:text-lg">Últimos Lanzamientos</p>
           </motion.div>
           
           {/* Release Carousel */}
@@ -299,12 +299,12 @@ Sello discográfico independiente dedicado a la música electrónica underground
             <div className="flex justify-center items-center">
               <button
                 onClick={prevRelease}
-                className="absolute left-0 z-10 p-3 text-white/60 hover:text-white transition-colors"
+                className="absolute left-0 z-10 p-2 md:p-3 text-white/60 hover:text-white transition-colors"
               >
-                <ChevronLeft size={32} />
+                <ChevronLeft className="w-6 h-6 md:w-8 md:h-8" />
               </button>
               
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-16">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 px-12 md:px-16">
                 {releases.slice(currentReleaseIndex, currentReleaseIndex + 3).map((release, index) => (
                   <motion.div
                     key={`${release.id}-${currentReleaseIndex}-${index}`}
@@ -360,9 +360,9 @@ Sello discográfico independiente dedicado a la música electrónica underground
               
               <button
                 onClick={nextRelease}
-                className="absolute right-0 z-10 p-3 text-white/60 hover:text-white transition-colors"
+                className="absolute right-0 z-10 p-2 md:p-3 text-white/60 hover:text-white transition-colors"
               >
-                <ChevronRight size={32} />
+                <ChevronRight className="w-6 h-6 md:w-8 md:h-8" />
               </button>
             </div>
           </div>
@@ -393,19 +393,19 @@ Sello discográfico independiente dedicado a la música electrónica underground
           />
         </div>
         
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12 md:mb-16"
           >
-            <h2 className="text-4xl md:text-6xl font-black text-white tracking-wide mb-4">SESIONES</h2>
-            <p className="text-white/60 text-lg">Revive los mejores momentos de nuestros encuentros</p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-wide mb-4">SESIONES</h2>
+            <p className="text-white/60 text-base md:text-lg px-4">Revive los mejores momentos de nuestros encuentros</p>
           </motion.div>
           
           {/* YouTube Sessions Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
             {/* Roddo b2b grenk */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -557,18 +557,18 @@ Sello discográfico independiente dedicado a la música electrónica underground
           />
         </div>
         
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12 md:mb-16"
           >
-            <h2 className="text-4xl md:text-6xl font-black text-white tracking-wide mb-4">RESIDENTES</h2>
-            <p className="text-white/60 text-lg">El núcleo de nuestro sonido</p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-wide mb-4">RESIDENTES</h2>
+            <p className="text-white/60 text-base md:text-lg">El núcleo de nuestro sonido</p>
           </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
             {residents.map((resident, index) => (
               <motion.div
                 key={resident.id}
@@ -743,18 +743,18 @@ Sello discográfico independiente dedicado a la música electrónica underground
           />
         </div>
         
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12 md:mb-16"
           >
-            <h2 className="text-4xl md:text-6xl font-black text-white tracking-wide mb-4">EVENTOS</h2>
-            <p className="text-white/60 text-lg">Próximos shows y entradas</p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-wide mb-4">EVENTOS</h2>
+            <p className="text-white/60 text-base md:text-lg">Próximos shows y entradas</p>
           </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
             {/* Event 1: ADN REWORK */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -869,18 +869,18 @@ Sello discográfico independiente dedicado a la música electrónica underground
           />
         </div>
         
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-12 md:mb-16"
           >
-            <h2 className="text-4xl md:text-6xl font-black text-white tracking-wide mb-4">DEMOS</h2>
-            <p className="text-white/60 text-lg">Envío de demos, radio y contrataciones</p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-wide mb-4">DEMOS</h2>
+            <p className="text-white/60 text-base md:text-lg px-4">Envío de demos, radio y contrataciones</p>
           </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}

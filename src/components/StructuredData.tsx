@@ -1,15 +1,13 @@
-'use client';
-
 export function StructuredData() {
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "MusicGroup",
     "name": "IMPCORE Records",
-    "alternateName": ["IMPCORE", "IMPCORE CL"],
-    "url": "https://impcore-cl.vercel.app",
-    "logo": "https://impcore-cl.vercel.app/images/LOGOIMP.png",
-    "description": "Sello discográfico independiente de Chile especializado en techno underground, hardgroove y música electrónica experimental",
-    "genre": ["Techno", "Electronic Music", "Hard Techno", "Underground Techno"],
+    "alternateName": ["IMPCORE", "IMPCORE CL", "impcore.cl"],
+    "url": "https://www.impcore.cl",
+    "logo": "https://www.impcore.cl/images/LOGOIMP.png",
+    "description": "Sello discográfico independiente de Valparaíso, Chile especializado en techno underground, hardgroove, raw techno y música electrónica experimental. Artistas: SPCMSK, CINDER, NASAC.",
+    "genre": ["Techno", "Electronic Music", "Hard Techno", "Underground Techno", "Hardgroove", "Raw Techno", "Peak Time Techno"],
     "location": {
       "@type": "Place",
       "address": {
@@ -19,10 +17,13 @@ export function StructuredData() {
         "addressCountry": "CL"
       }
     },
+    "foundingDate": "2024",
     "sameAs": [
       "https://soundcloud.com/impcore-records",
       "https://www.beatport.com/label/impcore-records",
-      "https://www.instagram.com/impcore_records"
+      "https://www.instagram.com/impcore_records",
+      "https://open.spotify.com/label/impcore-records",
+      "https://www.youtube.com/@impcore_records"
     ]
   };
 
@@ -30,10 +31,10 @@ export function StructuredData() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "IMPCORE Records",
-    "url": "https://impcore-cl.vercel.app",
+    "url": "https://www.impcore.cl",
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://impcore-cl.vercel.app/releases?search={search_term_string}",
+      "target": "https://www.impcore.cl/releases?search={search_term_string}",
       "query-input": "required name=search_term_string"
     }
   };
@@ -42,10 +43,10 @@ export function StructuredData() {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "IMPCORE Records",
-    "alternateName": ["IMPCORE", "IMPCORE CL"],
-    "url": "https://impcore-cl.vercel.app",
-    "logo": "https://impcore-cl.vercel.app/images/LOGOIMP.png",
-    "description": "Sello discográfico independiente de Chile especializado en techno underground",
+    "alternateName": ["IMPCORE", "IMPCORE CL", "impcore.cl"],
+    "url": "https://www.impcore.cl",
+    "logo": "https://www.impcore.cl/images/LOGOIMP.png",
+    "description": "Sello discográfico independiente de Valparaíso, Chile especializado en techno underground, hardgroove y raw techno",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Valparaíso",
@@ -56,7 +57,8 @@ export function StructuredData() {
       "@type": "ContactPoint",
       "contactType": "Customer Service",
       "availableLanguage": ["Spanish", "English"]
-    }
+    },
+    "foundingDate": "2024"
   };
 
   return (

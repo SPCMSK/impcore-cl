@@ -15,13 +15,16 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://impcore-cl.vercel.app'),
+  metadataBase: new URL('https://www.impcore.cl'),
   title: {
-    default: "IMPCORE RECORDS",
+    default: "IMPCORE RECORDS | Sello Techno Underground Chile",
     template: "%s | IMPCORE RECORDS"
   },
-  description: "IMPCORE Records - Sello discográfico independiente de Chile especializado en techno underground, hardgroove y música electrónica experimental. Con artistas residentes SPCMSK, CINDER y NASAC.",
+  description: "IMPCORE Records - Sello discográfico independiente de Valparaíso, Chile especializado en techno underground, hardgroove y raw techno. Descubre nuestros artistas residentes SPCMSK, CINDER y NASAC. Escucha en Beatport, Spotify y SoundCloud.",
   applicationName: "IMPCORE Records",
+  verification: {
+    google: "ba9737b318456caf",
+  },
   icons: {
     icon: [
       { url: '/icon.png', sizes: '32x32', type: 'image/png' },
@@ -74,10 +77,10 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "es_CL",
-    url: "https://impcore-cl.vercel.app",
+    url: "https://www.impcore.cl",
     siteName: "IMPCORE RECORDS",
-    title: "IMPCORE RECORDS",
-    description: "Sello discográfico independiente de Chile especializado en techno underground, hardgroove y música electrónica experimental.",
+    title: "IMPCORE RECORDS | Sello Techno Underground Chile",
+    description: "Sello discográfico independiente de Valparaíso, Chile especializado en techno underground, hardgroove y raw techno. Descubre nuestros artistas residentes SPCMSK, CINDER y NASAC.",
     images: [
       {
         url: "/images/LOGOIMP.png",
@@ -91,8 +94,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@impcore_records",
     creator: "@impcore_records",
-    title: "IMPCORE RECORDS",
-    description: "Sello discográfico independiente de Chile especializado en techno underground, hardgroove y música electrónica experimental.",
+    title: "IMPCORE RECORDS | Sello Techno Underground Chile",
+    description: "Sello discográfico independiente de Valparaíso, Chile especializado en techno underground, hardgroove y raw techno.",
     images: ["/images/LOGOIMP.png"],
   },
   robots: {
@@ -106,11 +109,8 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "your-google-verification-code", // Reemplazar con código real
-  },
   alternates: {
-    canonical: "https://impcore-cl.vercel.app",
+    canonical: "https://www.impcore.cl",
   },
 };
 
@@ -125,6 +125,7 @@ export default function RootLayout({
         <Suspense fallback={null}>
           <GoogleAnalytics />
         </Suspense>
+        <StructuredData />
       </head>
       <body className="antialiased min-h-screen bg-background text-foreground">
         <ClientProviders>
