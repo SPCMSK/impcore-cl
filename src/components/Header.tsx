@@ -82,7 +82,7 @@ export function Header() {
               {isHomePage && <a href="#sessions" className="hover:text-white transition-colors duration-300">SESIONES</a>}
               <Link href="/#residents" className="hover:text-white transition-colors duration-300">RESIDENTES</Link>
               <Link href="/#events" className="hover:text-white transition-colors duration-300">EVENTOS</Link>
-              <a href="/#faq" className="hover:text-white transition-colors duration-300">FAQ</a>
+              <Link href="/#faq" className="hover:text-white transition-colors duration-300">FAQ</Link>
               {isHomePage && <a href="#demos" className="hover:text-white transition-colors duration-300">DEMOS</a>}
             </div>
           </div>
