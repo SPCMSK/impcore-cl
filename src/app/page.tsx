@@ -1,11 +1,13 @@
 'use client';
 
 import Image from "next/image";
-import { Play, ChevronLeft, ChevronRight, X, Mail, ShoppingCart } from "lucide-react";
+import Link from "next/link";
+import { Play, ChevronLeft, ChevronRight, ChevronDown, X, Mail, ShoppingCart } from "lucide-react";
 import { motion } from 'framer-motion';
 import { Button } from "@/components/ui/Button";
 import { Release } from "@/types";
 import { useState, useEffect } from "react";
+import type { ReactNode } from "react";
 import InstantVideo from "@/components/InstantVideo";
 import StreamingModal from "@/components/StreamingModal";
 import { musicEvents } from "@/components/GoogleAnalytics";
@@ -138,6 +140,54 @@ const residents = [
   }
 ];
 
+// FAQ Accordion Component
+function FAQItem({ question, answer, delay }: { question: string; answer: ReactNode; delay: number }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay }}
+      className="bg-black/40 border border-white/10 rounded-xl overflow-hidden hover:border-white/20 transition-colors backdrop-blur-sm"
+    >
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center justify-between p-4 md:p-5 text-left"
+      >
+        <h3 className="text-base sm:text-lg md:text-xl font-semibold text-white/90 pr-4">
+          {question}
+        </h3>
+        <ChevronDown
+          className={`w-5 h-5 text-white/60 flex-shrink-0 transition-transform duration-300 ${
+            isOpen ? 'rotate-180' : ''
+          }`}
+        />
+      </button>
+
+      <motion.div
+        initial={false}
+        animate={{
+          height: isOpen ? 'auto' : 0,
+          opacity: isOpen ? 1 : 0
+        }}
+        transition={{
+          duration: 0.3,
+          ease: 'easeInOut'
+        }}
+        className="overflow-hidden"
+      >
+        <div className="px-4 md:px-5 pb-4 md:pb-5 pt-0">
+          <div className="text-white/70 text-sm md:text-base leading-relaxed space-y-3">
+            {answer}
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
 export default function Home() {
   const [releases, setReleases] = useState<Release[]>(initialReleases);
   const [currentReleaseIndex, setCurrentReleaseIndex] = useState(0);
@@ -190,40 +240,26 @@ export default function Home() {
 
         {/* Content */}
         <div className="relative z-10 text-center">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
+          <h1
             className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black text-white tracking-wider mb-8"
             style={{ fontFamily: 'var(--font-inter)' }}
           >
-IMPCORE
-          </motion.h1>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3 }}
+            IMPCORE
+          </h1>
+          <h2
             className="text-xl sm:text-2xl md:text-3xl font-light text-white/80 tracking-wide"
             style={{ fontFamily: 'var(--font-inter)' }}
           >
             RECORDS
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.6 }}
+          </h2>
+          <p
             className="text-base sm:text-lg md:text-xl text-white/70 mt-4 max-w-2xl mx-auto px-4"
           >
-Sello discográfico independiente dedicado a la música electrónica underground
-          </motion.p>
+            Sello discográfico independiente dedicado a la música electrónica underground
+          </p>
           
           {/* Call to Action Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.9 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center mt-8"
-          >
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
             <a
               href="#demos"
               className="px-8 py-3 text-white font-medium tracking-wide border border-white/30 rounded-lg hover:bg-white/10 transition-all duration-300 text-center"
@@ -236,27 +272,98 @@ Sello discográfico independiente dedicado a la música electrónica underground
             >
               Explorar Música
             </a>
-          </motion.div>
+          </div>
         </div>
         
-        {/* Navigation Menu - Top */}
-        <motion.nav
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
-          className="absolute top-8 left-0 right-0 z-20"
-        >
-          <div className="container mx-auto px-6 flex justify-between items-center">
-            <div className="flex space-x-10 text-white/80 text-base font-medium tracking-wide">
-              <a href="#home" className="hover:text-white transition-colors duration-300">INICIO</a>
-              <a href="#releases" className="hover:text-white transition-colors duration-300">LANZAMIENTOS</a>
-              <a href="#sessions" className="hover:text-white transition-colors duration-300">SESIONES</a>
-              <a href="#residents" className="hover:text-white transition-colors duration-300">RESIDENTES</a>
-              <a href="#events" className="hover:text-white transition-colors duration-300">EVENTOS</a>
-              <a href="#demos" className="hover:text-white transition-colors duration-300">DEMOS</a>
+        {/* Navigation Menu - Removed, using Header component instead */}
+      </section>
+
+      {/* ABOUT SECTION */}
+      <section id="about" className="py-14 md:py-20 bg-black relative overflow-hidden">
+        {/* Liquid Ether Background */}
+        <div style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 0 }}>
+          <LiquidEther
+            colors={["#1f2937", "#0f172a", "#1e293b"]}
+            mouseForce={16}
+            cursorSize={95}
+            isViscous={false}
+            viscous={30}
+            iterationsViscous={20}
+            iterationsPoisson={20}
+            resolution={0.35}
+            isBounce={false}
+            autoDemo={true}
+            autoSpeed={0.45}
+            autoIntensity={1.6}
+            takeoverDuration={0.25}
+            autoResumeDelay={3200}
+            autoRampDuration={0.6}
+            className="pointer-events-auto"
+          />
+        </div>
+
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto md:mx-0 mb-10 md:mb-12"
+          >
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-wide mb-3 text-left">SOBRE IMPCORE</h2>
+            <p className="text-white/60 text-sm md:text-base text-left">Immersive Mental Patterns Core</p>
+          </motion.div>
+
+          {/* Contenido */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mx-auto md:mx-0 max-w-5xl grid gap-10 md:gap-12 md:grid-cols-[2fr,1fr]"
+          >
+            <div className="space-y-6 text-left text-white/75 text-sm md:text-base leading-relaxed">
+              <p>
+                IMPCORE Records nace en la quinta región de Chile como un laboratorio sonoro dedicado a los ritmos industriales y al techno de alto impacto. Somos un sello independiente que documenta sesiones, edita lanzamientos digitales y construye experiencias inmersivas para la comunidad que respira música pesada.
+              </p>
+              <p>
+                Nuestro enfoque es descentralizar la escena electrónica, amplificando artistas del underground chileno y conectándolos con circuitos internacionales. Trabajamos con una curaduría precisa que prioriza textura, energía y narrativa dentro de géneros como raw techno, hardgroove y hard techno.
+              </p>
+              <p>
+                Además de editar música, diseñamos eventos colaborativos, transmisiones y residencias creativas. Cada proyecto que publicamos busca documentar la evolución del techno latinoamericano con una estética metálica, minimalista y honesta.
+              </p>
             </div>
-          </div>
-        </motion.nav>
+
+            <div className="space-y-6 text-left">
+              <div className="bg-white/5 border border-white/10 rounded-xl p-6 backdrop-blur-sm">
+                <p className="text-white/50 text-xs tracking-[0.2em] mb-3">RESIDENTES</p>
+                <div className="space-y-2 text-lg font-semibold text-white/90">
+                  <a href="#residents" className="block hover:text-white transition-colors">NASAC</a>
+                  <a href="#residents" className="block hover:text-white transition-colors">CINDER</a>
+                  <a href="#residents" className="block hover:text-white transition-colors">SPCMSK</a>
+                </div>
+              </div>
+
+              <div className="bg-white/5 border border-white/10 rounded-xl p-6 backdrop-blur-sm space-y-3">
+                <p className="text-white/50 text-xs tracking-[0.2em]">CONTACTO</p>
+                <a
+                  href="https://instagram.com/impcore.cl"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-white/70 hover:text-white transition-colors text-sm"
+                >
+                  Instagram · @impcore.cl
+                </a>
+                <a
+                  href="mailto:impcorecl@gmail.com"
+                  className="block text-white/70 hover:text-white transition-colors text-sm"
+                >
+                  impcorecl@gmail.com
+                </a>
+                <p className="text-white/50 text-xs">Valparaíso · Chile · Desde 2024</p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </section>
 
       {/* RELEASES SECTION */}
@@ -332,24 +439,24 @@ Sello discográfico independiente dedicado a la música electrónica underground
                         <h3 className="text-white font-bold text-lg mb-2 group-hover/card:text-accent transition-colors">{release.title}</h3>
                         <p className="text-white/60 mb-4">{release.artist}</p>
                         <div className="flex gap-2">
-                          <Button 
-                            size="sm" 
+                          <Button
+                            size="icon"
                             className="bg-white text-black hover:bg-white/90 shadow-lg shadow-accent/20"
                             onClick={() => handleListenClick(release)}
+                            aria-label={`Escuchar ${release.title}`}
                           >
-                            <Play className="h-4 w-4 mr-2" />
-                            Escuchar
-                        </Button>
-                        <Button 
-                          variant="secondary" 
-                          size="sm" 
-                          className="border-white/20 text-white hover:bg-white/10"
-                          onClick={() => handleBuyClick(release)}
-                        >
-                          <ShoppingCart className="h-4 w-4 mr-2" />
-                          Comprar
-                        </Button>
-                      </div>
+                            <Play className="h-4 w-4" />
+                          </Button>
+                          <Button
+                            variant="secondary"
+                            size="icon"
+                            className="border-white/20 text-white hover:bg-white/10"
+                            onClick={() => handleBuyClick(release)}
+                            aria-label={`Comprar ${release.title}`}
+                          >
+                            <ShoppingCart className="h-4 w-4" />
+                          </Button>
+                        </div>
                       {/* Bottom gradient line */}
                       <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-accent to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-500" />
                     </div>
@@ -535,6 +642,8 @@ Sello discográfico independiente dedicado a la música electrónica underground
 
       {/* RESIDENTS SECTION */}
       <section id="residents" className="py-20 bg-black relative overflow-hidden">
+        {/* También usar id="artists" para compatibilidad */}
+        <div id="artists"></div>
         {/* Liquid Ether Background */}
         <div style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 0 }}>
           <LiquidEther 
@@ -576,37 +685,39 @@ Sello discográfico independiente dedicado a la música electrónica underground
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.2 }}
-                className="text-center group/resident cursor-pointer perspective-1000"
-                onClick={() => {
-                  musicEvents.viewArtistProfile(resident.name);
-                  setSelectedResident(resident.id);
-                }}
+                className="text-center group/resident perspective-1000"
               >
-                <div className="relative mb-6 transform-gpu transition-all duration-300 hover:scale-105 hover:-rotate-1">
-                  <div className="w-64 h-72 mx-auto rounded-lg overflow-hidden border border-white/10 hover:border-accent/50 transition-all shadow-lg hover:shadow-[0_0_30px_rgba(0,102,255,0.4)]">
-                    <Image
-                      src={resident.image}
-                      alt={resident.name}
-                      width={256}
-                      height={288}
-                      className="w-full h-full object-cover group-hover/resident:scale-110 transition-transform duration-500"
-                      loading="lazy"
-                    />
-                    {/* Glow overlay */}
-                    <div className="absolute inset-0 opacity-0 group-hover/resident:opacity-100 transition-opacity duration-500 pointer-events-none">
-                      <div className="absolute inset-0 bg-gradient-to-t from-accent/30 via-transparent to-transparent" />
+                <Link
+                  href={`/artists/${resident.name.toLowerCase()}`}
+                  className="block"
+                  onClick={() => musicEvents.viewArtistProfile(resident.name)}
+                >
+                  <div className="relative mb-6 transform-gpu transition-all duration-300 hover:scale-105 hover:-rotate-1">
+                    <div className="w-64 h-80 mx-auto rounded-lg overflow-hidden border border-white/10 hover:border-accent/50 transition-all shadow-lg hover:shadow-[0_0_30px_rgba(0,102,255,0.4)]">
+                      <Image
+                        src={resident.image}
+                        alt={resident.name}
+                        width={256}
+                        height={320}
+                        className="w-full h-full object-cover object-top group-hover/resident:scale-110 transition-transform duration-500"
+                        loading="lazy"
+                      />
+                      {/* Glow overlay */}
+                      <div className="absolute inset-0 opacity-0 group-hover/resident:opacity-100 transition-opacity duration-500 pointer-events-none">
+                        <div className="absolute inset-0 bg-gradient-to-t from-accent/30 via-transparent to-transparent" />
+                      </div>
                     </div>
                   </div>
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-2 group-hover/resident:text-accent transition-colors">{resident.name}</h3>
-                <p className="text-white/60 text-lg mb-4">{resident.role}</p>
-                <p className="text-white/40 text-sm max-w-xs mx-auto">{resident.bio}</p>
-                <Button 
-                  className="mt-4 bg-white/10 text-white hover:bg-white/20 border border-white/20 hover:border-accent/50 shadow-lg shadow-accent/10 transition-all"
-                  size="sm"
-                >
-                  Ver Perfil
-                </Button>
+                  <h3 className="text-2xl font-bold text-white mb-2 group-hover/resident:text-accent transition-colors">{resident.name}</h3>
+                  <p className="text-white/60 text-lg mb-4">{resident.role}</p>
+                  <p className="text-white/40 text-sm max-w-xs mx-auto">{resident.bio}</p>
+                  <Button 
+                    className="mt-4 bg-white/10 text-white hover:bg-white/20 border border-white/20 hover:border-accent/50 shadow-lg shadow-accent/10 transition-all"
+                    size="sm"
+                  >
+                    Ver Perfil
+                  </Button>
+                </Link>
               </motion.div>
             ))}
           </div>
@@ -765,7 +876,7 @@ Sello discográfico independiente dedicado a la música electrónica underground
             >
               <div className="relative aspect-square overflow-hidden">
                 <Image
-                  src="/images/eventos.png"
+                  src="/images/ADN-REWORK.png"
                   alt="ADN REWORK"
                   width={400}
                   height={400}
@@ -777,10 +888,15 @@ Sello discográfico independiente dedicado a la música electrónica underground
               <div className="p-6">
                 <div className="text-accent text-sm font-semibold mb-2">18/10/2025</div>
                 <h3 className="text-2xl font-bold text-white mb-2">ADN REWORK</h3>
-                <p className="text-white/60 mb-4">Evento especial de techno</p>
-                <Button className="w-full bg-accent hover:bg-accent/90 text-white">
+                <p className="text-white/60 mb-4">Errazuriz 1078, Valparaiso</p>
+                <a
+                  href="https://app.tikzet.com/events/adn-rework?referred_by=0d7a6157-7369-4006-9e1f-7a53fe9fadce"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full bg-accent hover:bg-accent/90 text-white py-2 px-4 rounded-md text-center font-medium transition-all duration-300"
+                >
                   Obtener Entradas
-                </Button>
+                </a>
               </div>
             </motion.div>
 
@@ -794,7 +910,7 @@ Sello discográfico independiente dedicado a la música electrónica underground
             >
               <div className="relative aspect-square overflow-hidden">
                 <Image
-                  src="/images/eventos.png"
+                  src="/images/FlayerWork-Cuadrado.png"
                   alt="SOUND OR TRICK WORKSHOP"
                   width={400}
                   height={400}
@@ -808,7 +924,7 @@ Sello discográfico independiente dedicado a la música electrónica underground
                 <h3 className="text-2xl font-bold text-white mb-2">SOUND OR TRICK WORKSHOP</h3>
                 <p className="text-white/60 mb-4">Workshop de producción</p>
                 <Button className="w-full bg-accent hover:bg-accent/90 text-white">
-                  Más Información
+                  Para más Información Hablanos al instagram
                 </Button>
               </div>
             </motion.div>
@@ -823,7 +939,7 @@ Sello discográfico independiente dedicado a la música electrónica underground
             >
               <div className="relative aspect-square overflow-hidden">
                 <Image
-                  src="/images/eventos.png"
+                  src="/images/RAVE.png"
                   alt="RAVE"
                   width={400}
                   height={400}
@@ -835,12 +951,113 @@ Sello discográfico independiente dedicado a la música electrónica underground
               <div className="p-6">
                 <div className="text-accent text-sm font-semibold mb-2">18/10/2025</div>
                 <h3 className="text-2xl font-bold text-white mb-2">RAVE</h3>
-                <p className="text-white/60 mb-4">Noche de techno underground</p>
+                <p className="text-white/60 mb-4">Frontis Ex Carcel, Valparaiso</p>
                 <Button className="w-full bg-accent hover:bg-accent/90 text-white">
-                  Obtener Entradas
+                  Free Access
                 </Button>
               </div>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ SECTION */}
+      <section id="faq" className="py-14 md:py-20 bg-black relative overflow-hidden">
+        {/* Liquid Ether Background */}
+        <div style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 0 }}>
+          <LiquidEther
+            colors={["#1f2937", "#111827", "#0f172a"]}
+            mouseForce={15}
+            cursorSize={90}
+            isViscous={false}
+            viscous={30}
+            iterationsViscous={20}
+            iterationsPoisson={20}
+            resolution={0.35}
+            isBounce={false}
+            autoDemo={true}
+            autoSpeed={0.5}
+            autoIntensity={1.5}
+            takeoverDuration={0.25}
+            autoResumeDelay={3200}
+            autoRampDuration={0.6}
+            className="pointer-events-auto"
+          />
+        </div>
+
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-3xl mx-auto text-left mb-10 md:mb-12"
+          >
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-wide mb-3">PREGUNTAS FRECUENTES</h2>
+            <p className="text-white/60 text-sm md:text-base">Todo lo que necesitas saber sobre IMPCORE</p>
+          </motion.div>
+
+          <div className="max-w-3xl mx-auto space-y-3">
+            {/* FAQ 1 */}
+            <FAQItem
+              question="¿Cómo envío un demo a IMPCORE?"
+              answer={
+                <>
+                  Puedes enviar tu demo a través del <a href="#demos" className="text-white/80 hover:text-white transition-colors underline underline-offset-4 decoration-white/40">formulario de demos</a>. Comparte enlaces a tus tracks en plataformas como SoundCloud o Spotify; revisamos todos los envíos y respondemos dentro de 2 a 4 semanas.
+                </>
+              }
+              delay={0}
+            />
+
+            {/* FAQ 2 */}
+            <FAQItem
+              question="¿Dónde puedo comprar los releases de IMPCORE?"
+              answer={
+                <>
+                  Nuestros lanzamientos están disponibles en tiendas digitales como <span className="text-white/90 font-semibold">Beatport</span> y en streaming a través de <span className="text-white/90 font-semibold">Spotify</span>, <span className="text-white/90 font-semibold">Apple Music</span>, <span className="text-white/90 font-semibold">SoundCloud</span> y <span className="text-white/90 font-semibold">YouTube Music</span>. Todos los enlaces los encuentras en la sección de <a href="#releases" className="text-white/80 hover:text-white transition-colors underline underline-offset-4 decoration-white/40">lanzamientos</a>.
+                </>
+              }
+              delay={0.05}
+            />
+
+            {/* FAQ 3 */}
+            <FAQItem
+              question="¿Cómo puedo contratar a un artista de IMPCORE para un evento?"
+              answer={
+                <>
+                  Para bookings utiliza el <a href="#demos" className="text-white/80 hover:text-white transition-colors underline underline-offset-4 decoration-white/40">formulario de booking</a> o escríbenos directamente a <a href="mailto:impcorecl@gmail.com" className="text-white/80 hover:text-white transition-colors underline underline-offset-4 decoration-white/40">impcorecl@gmail.com</a>. Comparte fecha, lugar, tipo de evento y presupuesto estimado.
+                </>
+              }
+              delay={0.1}
+            />
+
+            {/* FAQ 4 */}
+            <FAQItem
+              question="¿IMPCORE acepta artistas nuevos?"
+              answer="Sí. Buscamos productores y DJs con una visión intensa y auténtica. Si exploras raw techno, hardgroove o hard techno, envíanos tu demo: priorizamos personalidad sonora y compromiso con la escena."
+              delay={0.15}
+            />
+
+            {/* FAQ 5 */}
+            <FAQItem
+              question="¿Qué género de música publica IMPCORE?"
+              answer={
+                <>
+                  Trabajamos techno underground en todas sus variantes de alta energía: <span className="text-white/90 font-semibold">Raw Techno</span>, <span className="text-white/90 font-semibold">Hardgroove</span>, <span className="text-white/90 font-semibold">Hard Techno</span> y <span className="text-white/90 font-semibold">Peak Time Techno</span>.
+                </>
+              }
+              delay={0.2}
+            />
+
+            {/* FAQ 6 */}
+            <FAQItem
+              question="¿Realizan eventos en vivo?"
+              answer={
+                <>
+                  Sí, desarrollamos encuentros gratuitos, showcases colaborativos y residencias con sellos aliados en Valparaíso y Santiago. Mantente al tanto a través de <a href="https://instagram.com/impcore.cl" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-white transition-colors underline underline-offset-4 decoration-white/40">Instagram</a>.
+                </>
+              }
+              delay={0.25}
+            />
           </div>
         </div>
       </section>

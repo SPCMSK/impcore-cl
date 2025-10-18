@@ -30,29 +30,6 @@ export const StreamingModal: React.FC<StreamingModalProps> = ({
     onClose();
   };
 
-  const getPlatformColor = (platform: string) => {
-    switch (platform.toLowerCase()) {
-      case 'spotify':
-        return 'hover:bg-green-600 border-green-500 text-green-400';
-      case 'apple music':
-        return 'hover:bg-gray-600 border-gray-500 text-gray-300';
-      case 'soundcloud':
-        return 'hover:bg-orange-600 border-orange-500 text-orange-400';
-      case 'youtube':
-        return 'hover:bg-red-600 border-red-500 text-red-400';
-      case 'bandcamp':
-        return 'hover:bg-blue-600 border-blue-500 text-blue-400';
-      case 'beatport':
-        return 'hover:bg-teal-600 border-teal-500 text-teal-400';
-      case 'itunes':
-        return 'hover:bg-purple-600 border-purple-500 text-purple-400';
-      case 'deezer':
-        return 'hover:bg-pink-600 border-pink-500 text-pink-400';
-      default:
-        return 'hover:bg-white/20 border-white/30 text-white/70';
-    }
-  };
-
   return (
     <div 
       className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
@@ -104,7 +81,7 @@ export const StreamingModal: React.FC<StreamingModalProps> = ({
                 console.log('Button clicked:', link.platform, link.url);
                 handlePlatformClick(link.url, link.platform);
               }}
-              className={`w-full flex items-center gap-4 p-4 rounded-lg border transition-all duration-200 cursor-pointer ${getPlatformColor(link.platform)}`}
+              className="w-full flex items-center gap-4 p-4 rounded-lg border transition-all duration-200 cursor-pointer hover:bg-white/10 border-white/20 text-white/80"
               shimmerSize="0.1em"
               shimmerDuration="2s"
               borderRadius="0.5rem"

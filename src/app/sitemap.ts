@@ -11,21 +11,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: `${baseUrl}/releases`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/artists`,
+      url: `${baseUrl}/artists/spcmsk`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/events`,
+      url: `${baseUrl}/artists/cinder`,
       lastModified: new Date(),
-      changeFrequency: 'weekly',
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/artists/nasac`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
       priority: 0.8,
     },
   ]
