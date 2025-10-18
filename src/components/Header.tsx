@@ -77,11 +77,11 @@ export function Header() {
             {/* Desktop Navigation - Show on all pages on desktop */}
             <div className="hidden md:flex space-x-6 lg:space-x-10 text-white/80 text-sm sm:text-base font-medium tracking-wide">
               <Link href="/" className="hover:text-white transition-colors duration-300">INICIO</Link>
-              <a href="/#releases" className="hover:text-white transition-colors duration-300">LANZAMIENTOS</a>
+              <Link href="/#releases" className="hover:text-white transition-colors duration-300">LANZAMIENTOS</Link>
               {isHomePage && <a href="#about" className="hover:text-white transition-colors duration-300">SOBRE IMPCORE</a>}
               {isHomePage && <a href="#sessions" className="hover:text-white transition-colors duration-300">SESIONES</a>}
-              <a href="/#residents" className="hover:text-white transition-colors duration-300">RESIDENTES</a>
-              <a href="/#events" className="hover:text-white transition-colors duration-300">EVENTOS</a>
+              <Link href="/#residents" className="hover:text-white transition-colors duration-300">RESIDENTES</Link>
+              <Link href="/#events" className="hover:text-white transition-colors duration-300">EVENTOS</Link>
               <a href="/#faq" className="hover:text-white transition-colors duration-300">FAQ</a>
               {isHomePage && <a href="#demos" className="hover:text-white transition-colors duration-300">DEMOS</a>}
             </div>
