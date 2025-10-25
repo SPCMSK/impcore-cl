@@ -5,6 +5,7 @@ import { Send, X, Radio, User, Mail, Link as LinkIcon, MessageSquare } from 'luc
 import { Button } from './ui/Button';
 import emailjs from '@emailjs/browser';
 import toast, { Toaster } from 'react-hot-toast';
+import { emailjsConfig, isEmailJsConfigured } from '@/lib/emailjs-config';
 
 interface RadioShowFormData {
   name: string;
@@ -53,11 +54,8 @@ export function RadioShowForm({ isOpen, onClose }: RadioShowFormProps) {
     }
 
     // Verificar variables de entorno
-    if (!process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 
-        !process.env.NEXT_PUBLIC_EMAILJS_CONTACT_TEMPLATE || 
-        !process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY) {
+    if (!isEmailJsConfigured()) {
       toast.error('Error de configuración: Variables de entorno de EmailJS no encontradas');
-      console.error('Variables de entorno faltantes para Radio Show');
       return;
     }
 
@@ -84,10 +82,10 @@ export function RadioShowForm({ isOpen, onClose }: RadioShowFormProps) {
       console.log('Enviando aplicación de radio con parámetros:', templateParams);
 
       const response = await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_CONTACT_TEMPLATE!,
+        emailjsConfig.serviceId,
+        emailjsConfig.contactTemplate,
         templateParams,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+        emailjsConfig.publicKey
       );
 
       console.log('Respuesta del email:', response);

@@ -22,12 +22,6 @@ const socialLinks = [
   },
 ];
 
-const footerLinks = [
-  { name: "Política de Privacidad", href: "/privacy" },
-  { name: "Términos de Servicio", href: "/terms" },
-  { name: "Contacto", href: "/contact" },
-];
-
 export function Footer() {
   // Show footer on all pages including homepage
   return (
@@ -75,17 +69,6 @@ export function Footer() {
                 >
                   <link.icon className="h-5 w-5" />
                   <span className="sr-only">{link.name}</span>
-                </Link>
-              ))}
-            </div>
-            <div className="flex flex-wrap gap-4 pt-4">
-              {footerLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="text-sm text-foreground/60 hover:text-accent transition-colors"
-                >
-                  {link.name}
                 </Link>
               ))}
             </div>

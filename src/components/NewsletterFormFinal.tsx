@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Button } from './ui/Button';
 import emailjs from '@emailjs/browser';
 import toast, { Toaster } from 'react-hot-toast';
+import { emailjsConfig, isEmailJsConfigured } from '@/lib/emailjs-config';
 
 interface NewsletterFormProps {
   className?: string;
@@ -28,13 +29,8 @@ export function NewsletterForm({ className = '' }: NewsletterFormProps) {
     }
 
     // Verificar que las variables de entorno estén configuradas
-    if (!process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || !process.env.NEXT_PUBLIC_EMAILJS_CONTACT_TEMPLATE || !process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY) {
+    if (!isEmailJsConfigured()) {
       toast.error('Error de configuración: Variables de entorno de EmailJS no encontradas');
-      console.error('Variables de entorno faltantes:', {
-        serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-        template: process.env.NEXT_PUBLIC_EMAILJS_CONTACT_TEMPLATE,
-        publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
-      });
       setIsLoading(false);
       return;
     }
@@ -58,10 +54,10 @@ export function NewsletterForm({ className = '' }: NewsletterFormProps) {
       };
 
       const result = await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_CONTACT_TEMPLATE!,
+        emailjsConfig.serviceId,
+        emailjsConfig.contactTemplate,
         templateParams,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+        emailjsConfig.publicKey
       );
       
       if (result.status === 200) {

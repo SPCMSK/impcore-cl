@@ -5,6 +5,7 @@ import { Send, X, Users, User, Mail, Calendar, MapPin, MessageSquare } from 'luc
 import { Button } from './ui/Button';
 import emailjs from '@emailjs/browser';
 import toast, { Toaster } from 'react-hot-toast';
+import { emailjsConfig, isEmailJsConfigured } from '@/lib/emailjs-config';
 
 interface BookingFormData {
   name: string;
@@ -57,11 +58,8 @@ export function BookingForm({ isOpen, onClose }: BookingFormProps) {
     }
 
     // Verificar variables de entorno
-    if (!process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 
-        !process.env.NEXT_PUBLIC_EMAILJS_CONTACT_TEMPLATE || 
-        !process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY) {
+    if (!isEmailJsConfigured()) {
       toast.error('Error de configuración: Variables de entorno de EmailJS no encontradas');
-      console.error('Variables de entorno faltantes para Booking');
       return;
     }
 
@@ -90,10 +88,10 @@ export function BookingForm({ isOpen, onClose }: BookingFormProps) {
       console.log('Enviando solicitud de booking con parámetros:', templateParams);
 
       const response = await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_CONTACT_TEMPLATE!,
+        emailjsConfig.serviceId,
+        emailjsConfig.contactTemplate,
         templateParams,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+        emailjsConfig.publicKey
       );
 
       console.log('Respuesta del email:', response);

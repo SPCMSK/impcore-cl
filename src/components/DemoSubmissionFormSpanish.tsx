@@ -5,6 +5,7 @@ import { Send, X, Music, User, Mail, List, Link as LinkIcon } from 'lucide-react
 import { Button } from './ui/Button';
 import emailjs from '@emailjs/browser';
 import toast, { Toaster } from 'react-hot-toast';
+import { emailjsConfig, isEmailJsConfigured } from '@/lib/emailjs-config';
 
 interface DemoFormData {
   artistName: string;
@@ -53,14 +54,8 @@ export function DemoSubmissionForm({ isOpen, onClose }: DemoSubmissionFormProps)
       return;
     }
 
-    // Verificar que las variables de entorno estén configuradas
-    if (!process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || !process.env.NEXT_PUBLIC_EMAILJS_DEMO_TEMPLATE || !process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY) {
+    if (!isEmailJsConfigured()) {
       toast.error('Error de configuración: Variables de entorno de EmailJS no encontradas');
-      console.error('Variables de entorno faltantes:', {
-        serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-        template: process.env.NEXT_PUBLIC_EMAILJS_DEMO_TEMPLATE,
-        publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
-      });
       return;
     }
 
@@ -89,10 +84,10 @@ export function DemoSubmissionForm({ isOpen, onClose }: DemoSubmissionFormProps)
       console.log('Enviando email con parámetros:', templateParams);
 
       const response = await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_DEMO_TEMPLATE!,
+        emailjsConfig.serviceId,
+        emailjsConfig.demoTemplate,
         templateParams,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+        emailjsConfig.publicKey
       );
 
       console.log('Respuesta del email:', response);
