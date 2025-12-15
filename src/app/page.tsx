@@ -14,6 +14,7 @@ import { musicEvents } from "@/components/GoogleAnalytics";
 import { DemoSubmissionForm } from "@/components/DemoSubmissionFormSpanish";
 import { RadioShowForm } from "@/components/RadioShowForm";
 import { BookingForm } from "@/components/BookingForm";
+import { EventTicketModal } from "@/components/EventTicketModal";
 import { localDataManager } from "@/data/content";
 import dynamic from 'next/dynamic';
 
@@ -196,6 +197,7 @@ export default function Home() {
   const [isDemoFormOpen, setIsDemoFormOpen] = useState(false);
   const [isRadioFormOpen, setIsRadioFormOpen] = useState(false);
   const [isBookingFormOpen, setIsBookingFormOpen] = useState(false);
+  const [isEventModalOpen, setIsEventModalOpen] = useState(false);
 
   // Cargar releases desde localStorage al montar el componente
   useEffect(() => {
@@ -865,96 +867,59 @@ export default function Home() {
             <p className="text-white/60 text-base md:text-lg">Próximos shows y entradas</p>
           </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto">
-            {/* Event 1: ADN REWORK */}
+          <div className="flex justify-center max-w-7xl mx-auto">
+            {/* Event: IMPCORE ANIVERSARIO */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0 }}
-              className="group/event bg-zinc-900 rounded-lg overflow-hidden hover:bg-zinc-800 transition-all duration-300 cursor-pointer"
+              className="group/event bg-zinc-800 rounded-xl overflow-hidden hover:bg-zinc-700 transition-all duration-300 cursor-pointer max-w-md w-full"
+              onClick={() => setIsEventModalOpen(true)}
             >
               <div className="relative aspect-square overflow-hidden">
                 <Image
-                  src="/images/ADN-REWORK.png"
-                  alt="ADN REWORK"
-                  width={400}
-                  height={400}
-                  className="w-full h-full object-cover group-hover/event:scale-110 transition-transform duration-500"
+                  src="/images/flayer aniversario1080x1080.png"
+                  alt="IMPCORE ANIVERSARIO"
+                  width={500}
+                  height={500}
+                  className="w-full h-full object-cover group-hover/event:scale-105 transition-transform duration-500"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover/event:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover/event:opacity-100 transition-opacity duration-300" />
+                
+                {/* Overlay content */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover/event:translate-y-0 opacity-0 group-hover/event:opacity-100 transition-all duration-300">
+                  <p className="text-white/90 text-sm leading-relaxed">
+                    ¡2 años de música! Celebra con Bounce2Bounce, doble stage, visuales interactivas y muchas sorpresas más.
+                  </p>
+                </div>
               </div>
+              
               <div className="p-6">
-                <div className="text-accent text-sm font-semibold mb-2">18/10/2025</div>
-                <h3 className="text-2xl font-bold text-white mb-2">ADN REWORK</h3>
-                <p className="text-white/60 mb-4">Errazuriz 1078, Valparaiso</p>
-                <a
-                  href="https://app.tikzet.com/events/adn-rework?referred_by=0d7a6157-7369-4006-9e1f-7a53fe9fadce"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full bg-accent hover:bg-accent/90 text-white py-2 px-4 rounded-md text-center font-medium transition-all duration-300"
-                >
-                  Obtener Entradas
-                </a>
-              </div>
-            </motion.div>
-
-            {/* Event 2: SOUND OR TRICK WORKSHOP */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="group/event bg-zinc-900 rounded-lg overflow-hidden hover:bg-zinc-800 transition-all duration-300 cursor-pointer"
-            >
-              <div className="relative aspect-square overflow-hidden">
-                <Image
-                  src="/images/FlayerWork-Cuadrado.png"
-                  alt="SOUND OR TRICK WORKSHOP"
-                  width={400}
-                  height={400}
-                  className="w-full h-full object-cover group-hover/event:scale-110 transition-transform duration-500"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover/event:opacity-100 transition-opacity duration-300" />
-              </div>
-              <div className="p-6">
-                <div className="text-accent text-sm font-semibold mb-2">Próximamente</div>
-                <h3 className="text-2xl font-bold text-white mb-2">SOUND OR TRICK WORKSHOP</h3>
-                <p className="text-white/60 mb-4">Workshop de producción</p>
-                <Button className="w-full bg-accent hover:bg-accent/90 text-white">
-                  Para más Información Hablanos al instagram
-                </Button>
-              </div>
-            </motion.div>
-
-            {/* Event 3: RAVE */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="group/event bg-zinc-900 rounded-lg overflow-hidden hover:bg-zinc-800 transition-all duration-300 cursor-pointer"
-            >
-              <div className="relative aspect-square overflow-hidden">
-                <Image
-                  src="/images/RAVE.png"
-                  alt="RAVE"
-                  width={400}
-                  height={400}
-                  className="w-full h-full object-cover group-hover/event:scale-110 transition-transform duration-500"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover/event:opacity-100 transition-opacity duration-300" />
-              </div>
-              <div className="p-6">
-                <div className="text-accent text-sm font-semibold mb-2">18/10/2025</div>
-                <h3 className="text-2xl font-bold text-white mb-2">RAVE</h3>
-                <p className="text-white/60 mb-4">Frontis Ex Carcel, Valparaiso</p>
-                <Button className="w-full bg-accent hover:bg-accent/90 text-white">
-                  Free Access
-                </Button>
+                <div className="flex items-center justify-between mb-3">
+                  <div className="text-accent text-sm font-semibold">VIERNES 2 DE ENERO</div>
+                  <div className="bg-red-600 text-white text-xs px-2 py-1 rounded-full font-semibold">
+                    2 AÑOS
+                  </div>
+                </div>
+                
+                <h3 className="text-2xl font-bold text-white mb-2">IMPCORE ANIVERSARIO</h3>
+                <p className="text-white/60 mb-2">Espacio Underground</p>
+                <p className="text-white/50 text-sm mb-4">Errázuriz 1024, Valparaíso</p>
+                
+                <div className="space-y-2 mb-4">
+                  <div className="text-white/70 text-sm">
+                    <span className="text-accent font-semibold">Desde $5.000</span> - Stock limitado
+                  </div>
+                  <div className="text-white/60 text-xs">
+                    Bounce2Bounce • Doble Stage • Visuales Interactivas
+                  </div>
+                </div>
+                
+                <button className="w-full bg-accent hover:bg-accent/90 text-white py-3 px-4 rounded-md font-semibold transition-all duration-300 shadow-lg hover:shadow-accent/25">
+                  Ver Entradas y Detalles
+                </button>
               </div>
             </motion.div>
           </div>
@@ -1185,6 +1150,43 @@ export default function Home() {
       <BookingForm
         isOpen={isBookingFormOpen}
         onClose={() => setIsBookingFormOpen(false)}
+      />
+
+      {/* Event Ticket Modal */}
+      <EventTicketModal
+        isOpen={isEventModalOpen}
+        onClose={() => setIsEventModalOpen(false)}
+        eventTitle="IMPCORE ANIVERSARIO"
+        eventDescription={`IMPCORE RECORDS ANIVERSARIO: ¡2 AÑOS DE MÚSICA!
+
+Prepárate para celebrar nuestros dos años de la creación de este hermoso movimiento y queremos festejarlo a lo grande, con una propuesta luminosa y audiovisual que preparamos con mucho esfuerzo y cariño para ustedes.
+
+Contaremos con:
+🔊 Refuerzo de audio para una experiencia inmersiva.
+💡 Propuestas visuales interactivas.
+🎁 Premios dentro del mismo evento.
+¡Y un montón de otras sorpresas!
+
+🔥BOUNCE2BOUNCE 🔥
+El dúo conformado por @frvnccscv y @machromel nos visitan en este aniversario para asegurarnos una noche de disfrute y celebración. Con una reciente actuación explosiva en 240 F2F, se consolidan como una de las potencias del bounce con sets energéticos que son una invitación directa a la pista de baile
+
+🎧 LINE UP 🎧
+Bounce2Bounce
+@nvsvc_wav 
+@spc.musik 
+@nonospuedensoportar 
+@cinderdj__ 
+@_tivre 
+@abdel.music 
+@lxxnrdx 
+@sozz909 
+
+✨ DOBLE STAGE, DOBLE INMERSIÓN VISUAL ✨
+Tendremos dos stages con el mismo audio, pero con intervenciones visuales distintas:
+Main Stage : Estructuras y LEDs controladas por nuestro VJ @soke_vxr que adornarán nuestro escenario de una manera futurista e impactante llevandote en un viaje luminico de alto impacto .
+Immersive Stage : Contaremos con visuales más envolventes y de carácter interactivo encargadas de @deseodistante que te haran perderte en un viaje de interacción con la musica y el arte visual.
+
+¡Te invitamos a celebrar estos 2 años junto a nosotros con una experiencia sonora y visual inolvidable!`}
       />
     </div>
   );
