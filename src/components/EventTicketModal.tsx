@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { X, Users, Clock, ShoppingCart } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -50,7 +49,7 @@ export function EventTicketModal({ isOpen, onClose, eventTitle, eventDescription
   
   const handleTicketPurchase = (ticketName: string, price: string) => {
     const message = encodeURIComponent(
-      `¡Hola! Estoy interesado/a en comprar la entrada "${ticketName}" (${price}) para el evento ${eventTitle}. ¿Podrían enviarme los datos para la transferencia?`
+      `¡Hola! Estoy interesado/a en comprar la entrada &quot;${ticketName}&quot; (${price}) para el evento ${eventTitle}. ¿Podrían enviarme los datos para la transferencia?`
     );
     const whatsappUrl = `https://wa.me/${whatsappNumber.replace(/\s+/g, '')}?text=${message}`;
     window.open(whatsappUrl, '_blank');
@@ -116,7 +115,7 @@ export function EventTicketModal({ isOpen, onClose, eventTitle, eventDescription
                 </div>
                 
                 <p className="text-white/60 text-sm mb-4">
-                  Venta por transferencia bancaria. Haz clic en "Comprar" para contactarnos por WhatsApp.
+                  Venta por transferencia bancaria. Haz clic en &quot;Comprar&quot; para contactarnos por WhatsApp.
                 </p>
 
                 <div className="grid gap-3">
