@@ -14,7 +14,6 @@ import { musicEvents } from "@/components/GoogleAnalytics";
 import { DemoSubmissionForm } from "@/components/DemoSubmissionFormSpanish";
 import { RadioShowForm } from "@/components/RadioShowForm";
 import { BookingForm } from "@/components/BookingForm";
-import { EventTicketModal } from "@/components/EventTicketModal";
 import { localDataManager } from "@/data/content";
 import dynamic from 'next/dynamic';
 
@@ -197,7 +196,6 @@ export default function Home() {
   const [isDemoFormOpen, setIsDemoFormOpen] = useState(false);
   const [isRadioFormOpen, setIsRadioFormOpen] = useState(false);
   const [isBookingFormOpen, setIsBookingFormOpen] = useState(false);
-  const [isEventModalOpen, setIsEventModalOpen] = useState(false);
 
   // Cargar releases desde localStorage al montar el componente
   useEffect(() => {
@@ -875,7 +873,6 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ delay: 0 }}
               className="group/event bg-zinc-800 rounded-xl overflow-hidden hover:bg-zinc-700 transition-all duration-300 cursor-pointer max-w-md w-full"
-              onClick={() => setIsEventModalOpen(true)}
             >
               <div className="relative aspect-square overflow-hidden">
                 <Image
@@ -917,9 +914,14 @@ export default function Home() {
                   </div>
                 </div>
                 
-                <button className="w-full bg-accent hover:bg-accent/90 text-white py-3 px-4 rounded-md font-semibold transition-all duration-300 shadow-lg hover:shadow-accent/25">
-                  Ver Entradas y Detalles
-                </button>
+                <a
+                  href="http://www.delotrolado.club/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full bg-accent hover:bg-accent/90 text-white py-3 px-4 rounded-md font-semibold transition-all duration-300 shadow-lg hover:shadow-accent/25 text-center"
+                >
+                  Obtener Entradas
+                </a>
               </div>
             </motion.div>
           </div>
@@ -1150,43 +1152,6 @@ export default function Home() {
       <BookingForm
         isOpen={isBookingFormOpen}
         onClose={() => setIsBookingFormOpen(false)}
-      />
-
-      {/* Event Ticket Modal */}
-      <EventTicketModal
-        isOpen={isEventModalOpen}
-        onClose={() => setIsEventModalOpen(false)}
-        eventTitle="IMPCORE ANIVERSARIO"
-        eventDescription={`IMPCORE RECORDS ANIVERSARIO: ¡2 AÑOS DE MÚSICA!
-
-Prepárate para celebrar nuestros dos años de la creación de este hermoso movimiento y queremos festejarlo a lo grande, con una propuesta luminosa y audiovisual que preparamos con mucho esfuerzo y cariño para ustedes.
-
-Contaremos con:
-🔊 Refuerzo de audio para una experiencia inmersiva.
-💡 Propuestas visuales interactivas.
-🎁 Premios dentro del mismo evento.
-¡Y un montón de otras sorpresas!
-
-🔥BOUNCE2BOUNCE 🔥
-El dúo conformado por @frvnccscv y @machromel nos visitan en este aniversario para asegurarnos una noche de disfrute y celebración. Con una reciente actuación explosiva en 240 F2F, se consolidan como una de las potencias del bounce con sets energéticos que son una invitación directa a la pista de baile
-
-🎧 LINE UP 🎧
-Bounce2Bounce
-@nvsvc_wav 
-@spc.musik 
-@nonospuedensoportar 
-@cinderdj__ 
-@_tivre 
-@abdel.music 
-@lxxnrdx 
-@sozz909 
-
-✨ DOBLE STAGE, DOBLE INMERSIÓN VISUAL ✨
-Tendremos dos stages con el mismo audio, pero con intervenciones visuales distintas:
-Main Stage : Estructuras y LEDs controladas por nuestro VJ @soke_vxr que adornarán nuestro escenario de una manera futurista e impactante llevandote en un viaje luminico de alto impacto .
-Immersive Stage : Contaremos con visuales más envolventes y de carácter interactivo encargadas de @deseodistante que te haran perderte en un viaje de interacción con la musica y el arte visual.
-
-¡Te invitamos a celebrar estos 2 años junto a nosotros con una experiencia sonora y visual inolvidable!`}
       />
     </div>
   );
